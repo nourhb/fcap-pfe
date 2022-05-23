@@ -11,7 +11,7 @@ var TaskArchive = function (taskarchive) {
 
 // get all task
 TaskArchive.getAllTasks = (result) => {
-    dbConn.query("SELECT * FROM taskarchive", (err, res) => {
+    dbConn.query("SELECT * FROM taskarchive where state='inactive'", (err, res) => {
         if (err) {
             console.log("Error while fetching tasks", err);
             result(null, err);
