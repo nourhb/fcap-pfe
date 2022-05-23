@@ -16,7 +16,7 @@ var Todo = function (task) {
 //get all task
 Todo.getAllTodaytodoByDep = (dep, result) => { //data = req.body
 
-    dbConn.query("SELECT * FROM task where date_frame=current_date() and dep=? ", [dep], (err, res) => {
+    dbConn.query("SELECT * FROM task where date_frame=current_date() and state='active' and dep=? ", [dep], (err, res) => {
         if (err) {
             console.log("Error while fetching tasks", err);
             result(null, err);
