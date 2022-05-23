@@ -128,6 +128,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `initialid` varchar(6) NOT NULL,
   `roles` varchar(225) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'hi',
+  `state` varchar(225) NOT NULL DEFAULT 'active',
   PRIMARY KEY (`id`),
   UNIQUE KEY `cin` (`cin`),
   KEY `dep` (`dep`)
@@ -364,10 +365,11 @@ CREATE TABLE IF NOT EXISTS `task` (
   `dep` int NOT NULL,
   `title` varchar(100) NOT NULL,
   `instruction` varchar(200) NOT NULL,
-  `duration` int NOT NULL,
+  `duration` time NOT NULL,
   `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `status` int NOT NULL DEFAULT '0',
   `date_frame` date NOT NULL DEFAULT (curdate()),
+   `state` varchar(225) NOT NULL DEFAULT 'active',
   PRIMARY KEY (`id`),
   UNIQUE KEY `taskid` (`taskid`),
   KEY `department` (`dep`)
