@@ -19,7 +19,7 @@ var Employee = function (employee) {
 
 // get all employees
 Employee.getAllEmployees = (result) => {
-    dbConn.query("SELECT * FROM employees", (err, res) => {
+    dbConn.query("SELECT * FROM employees where state='active'", (err, res) => {
         if (err) {
             console.log("Error while fetching employes", err);
             result(null, err);
