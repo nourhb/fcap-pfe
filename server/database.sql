@@ -421,9 +421,18 @@ CREATE TABLE IF NOT EXISTS `taskarchive` (
 ) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DELIMITER $$
---
+
+--trigger
+/*CREATE TRIGGER delete_login AFTER UPDATE ON employees
+ FOR EACH ROW DELETE login
+FROM login 
+INNER JOIN employees t2 ON login.cin = t2.cin
+WHERE t2.state IN ('inactive')*/
 -- Évènements
 --
+/*CREATE DEFINER=root@localhost EVENT Insert_login ON SCHEDULE EVERY 1 SECOND STARTS '2022-05-23 14:56:23' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO login(cin,user_id,password)
+SELECT cin,initialid,password FROM employees
+WHERE cin not in(SELECT cin FROM login)*/
 DROP EVENT IF EXISTS `depname`$$
 CREATE DEFINER=`root`@`localhost` EVENT `depname` ON SCHEDULE EVERY 1 SECOND STARTS '2022-04-07 10:56:13' ON COMPLETION NOT PRESERVE ENABLE DO update employees 
 join   department 
@@ -449,7 +458,6 @@ join   task
 on  selectedtask.taskid = task.taskid 
 set selectedtask.estimated_time= task.duration 
 where selectedtask.taskid = task.taskid$$
-
 DELIMITER ;
 COMMIT;
 
