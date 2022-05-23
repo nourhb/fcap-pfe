@@ -13,7 +13,7 @@ var EMPArchive = function (emparchive) {
 };
 
 EMPArchive.getAllEMP = (result) => {
-    dbConn.query("SELECT * FROM emparchive", (err, res) => {
+    dbConn.query("SELECT * FROM employees where state='inactive'", (err, res) => {
         if (err) {
             console.log("Error while fetching EMP", err);
             result(null, err);
