@@ -14,7 +14,7 @@ var Task = function (task) {
 
 // get all task
 Task.getAllTasks = (result) => {
-    dbConn.query("SELECT * FROM task", (err, res) => {
+    dbConn.query("SELECT * FROM task where state='active'", (err, res) => {
         if (err) {
             console.log("Error while fetching tasks", err);
             result(null, err);
