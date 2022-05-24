@@ -102,7 +102,7 @@ function TaskDetail() {
                             </tr>
                         </thead>
                         <tbody>
-                            {record.map((name, key) => (
+                            {record.map((name, key) => (     
                                 <tr className="table-warning" key={name.id}>
                                     <td>{name.taskid}</td>
                                     <td>{name.title}</td>
