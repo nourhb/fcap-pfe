@@ -1,128 +1,134 @@
   @charset "UTF-8";
   @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
   @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-.wallpaper {
-  background-image: url("C:\Users\user\Desktop\fcap-pfe\client\src\assets\images\bg.jpg");
-  background-size: cover;
-  min-height: 89vh;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: 0;
-  background-color: #fff;
-}
 
-#flamelab-convo-widget {
-  position: fixed;
-  bottom: 150px;
-  left: -40px;
-  animation-name: flamelab-convo-widget_enter;
-  animation-duration: 1.5s;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  z-index: 1000;
-  color: black;
-}
-#flamelab-convo-widget .flamelab-cw-msg-box .flamelab-cw-buttons .flamelab-cw-button-yes,
-:after,
-:before {
-  box-sizing: border-box;
-  margin: 0;
-}
-#flamelab-convo-widget img {
-  animation-name: flamelab-convo-widget_rotate;
-  animation-duration: 1.53s;
-  transform: rotate(20deg);
-  
-}
-.flamelab-cw-msg-box {
-  background: rgb(163, 113, 113);
-  width: 280px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgb(0 0 0 / 25%);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  animation-name: flamelab-convo-widget_msg-appear;
-  animation-duration: 2s;
-  font-size: 15px;
-  line-height: 23px;
-}
-.flamelab-cw-buttons {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 0 -4px;
-  margin-top: 8px;
-  font-weight: 600;
-}
-.flamelab-cw-button-yes {
-  color: #FF1B96;
-  font-weight: 700;
-}
+  .wallpaper {
+    background-image: url("C:\Users\user\Desktop\fcap-pfe\client\src\assets\images\bg.jpg");
+    background-size: cover;
+    min-height: 89vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    background-color: #fff;
+    background-attachment: fixed;
+  }
+
+  #flamelab-convo-widget {
+    position: fixed;
+    bottom: 150px;
+    left: -40px;
+    animation-name: flamelab-convo-widget_enter;
+    animation-duration: 1.5s;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 1000;
+    color: black;
+  }
+
+  #flamelab-convo-widget .flamelab-cw-msg-box .flamelab-cw-buttons .flamelab-cw-button-yes,
+  :after,
+  :before {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  #flamelab-convo-widget img {
+    animation-name: flamelab-convo-widget_rotate;
+    animation-duration: 1.53s;
+    transform: rotate(20deg);
+
+  }
+
+  .flamelab-cw-msg-box {
+    background: rgb(163, 113, 113);
+    width: 280px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgb(0 0 0 / 25%);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    animation-name: flamelab-convo-widget_msg-appear;
+    animation-duration: 2s;
+    font-size: 15px;
+    line-height: 23px;
+  }
+
+  .flamelab-cw-buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 -4px;
+    margin-top: 8px;
+    font-weight: 600;
+  }
+
+  .flamelab-cw-button-yes {
+    color: #FF1B96;
+    font-weight: 700;
+  }
 
 
-.landing {
+  .landing {
 
 
 
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-.btnlanding {
-  margin-top: calc(50% + 25px);
-  position: relative;
-  display: inline-block;
-  width: 800px;
-  height: 100px;
-  font-size: 2em;
-  font-weight: bold;
-  line-height: 2px;
-  text-align: center;
-  text-transform: uppercase;
-  background-color: transparent;
-  cursor: pointer;
-  text-decoration: none;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 1800;
-  font-size: 35px;
-  letter-spacing: 0.1em;
-}
+  .btnlanding {
+    position: relative;
+    display: inline-block;
+    width: 800px;
+    height: 100px;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 1800;
+    font-size: 35px;
+    letter-spacing: 0.1em;
+  }
 
-.btnlanding svg {
-  position: absolute;
-  top: -60px;
-  left: 100px;
-}
+  .btnlanding svg {
+    position: absolute;
+    top: -60px;
+    left: 100px;
+  }
 
-.btnlanding svg rect {
- 
-  stroke-width: 8;
-  stroke-dasharray: 706, 0;
-  stroke-dashoffset: 0;
-  -webkit-transition: all 600ms ease;
-  transition: all 600ms ease;
-}
+  .btnlanding svg rect {
 
-.btnlanding span {
-  background: rgb(255, 130, 130);
-  background: -moz-linear-gradient(left, rgba(255, 130, 130, 1) 0%, #333758ee 100%);
-  background: -webkit-linear-gradient(left, rgba(255, 130, 130, 1) 0%, #333758ee 100%);
-  background: linear-gradient(to right, rgba(255, 130, 130, 1) 0%, #333758ee 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8282', endColorstr='#e178ed', GradientType=1);
+    stroke-width: 8;
+    stroke-dasharray: 706, 0;
+    stroke-dashoffset: 0;
+    -webkit-transition: all 600ms ease;
+    transition: all 600ms ease;
+  }
 
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+  .btnlanding span {
+    background: rgb(255, 130, 130);
+    background: -moz-linear-gradient(left, rgba(255, 130, 130, 1) 0%, #333758ee 100%);
+    background: -webkit-linear-gradient(left, rgba(255, 130, 130, 1) 0%, #333758ee 100%);
+    background: linear-gradient(to right, rgba(255, 130, 130, 1) 0%, #333758ee 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8282', endColorstr='#e178ed', GradientType=1);
 
-.btnlanding:hover svg rect {
-  stroke-width: 8;
-  stroke-dasharray: 0, 30;
-  stroke-dashoffset: 874;
-}
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .btnlanding:hover svg rect {
+    stroke-width: 8;
+    stroke-dasharray: 0, 30;
+    stroke-dashoffset: 874;
+  }
 
 
 
@@ -205,13 +211,11 @@
 
   .history {
     background-image: url("C:\Users\user\Desktop\fcap-pfe\client\src\assets\images\history.gif");
-    min-height: 30vh;
-    height: 100px;
+    min-height: 25vh;
     width: 300px;
     background-position: relative;
     background-size: cover;
-    margin-right: 10%;
-    margin-bottom: 0%;
+    margin-right: -10%;
     float: right;
   }
 
@@ -228,13 +232,11 @@
 
   .task {
     background-image: url("C:\Users\user\Desktop\fcap-pfe\client\src\assets\images\task2.gif");
-    min-height: 40vh;
-    height: 100px;
-    width: 400px;
+    min-height: 30vh;
+    width: 300px;
     background-position: relative;
     background-size: cover;
-    margin-right: 10%;
-    margin-bottom: 0%;
+    margin-right: -10%;
     float: right;
   }
 
@@ -243,21 +245,41 @@
     min-height: 5vh;
     max-width: 5vh;
     background-size: cover;
-    margin-left: -20px;
+    margin-left: -25px;
     margin-top: -20px;
     margin-bottom: -20px;
   }
 
+  .checkedby {
+    background-image: url("C:\Users\user\Desktop\fcap-pfe\client\src\assets\images\checked.png");
+    min-height: 5vh;
+    max-width: 5vh;
+    background-size: cover;
+    margin-left: -25px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+    cursor: pointer;
+  }
+
   .team {
     background-image: url("C:\Users\user\Desktop\fcap-pfe\client\src\assets\images\task1.gif");
-    min-height: 40vh;
-    height: 200px;
-    width: 400px;
+    min-height: 25vh;
+    width: 300px;
     background-position: relative;
     background-size: cover;
-    margin-right: -500px;
-    margin-bottom: 0%;
+    margin-right: -10%;
     float: right;
+  }
+
+  .success {
+    background-image: url("C:\Users\user\Desktop\fcap-pfe\client\src\assets\images\success.gif");
+    height: 350px;
+    width: 450px;
+    background-position: relative;
+    background-size: cover;
+    align-items: center;
+    align-self: center;
+
   }
 
   /*     ****** btn link to today's todo ******** */
@@ -19479,7 +19501,7 @@
     margin-left: 3rem !important;
   }
 
- 
+
 
   .pt-0,
   .py-0 {
@@ -21932,9 +21954,9 @@
   }
 
   .ftco-navbar-light {
-    background:#649fbe;
+    background: #649fbe;
     -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     position: absolute;
     top: 0px;
     left: 0;
@@ -24425,7 +24447,7 @@
     cursor: pointer;
   }
 
-  #button-5 a {
+  #button-5 .log {
     position: relative;
     transition: all .45s ease-Out;
   }
@@ -24445,7 +24467,7 @@
     left: 0;
   }
 
-  #button-5:hover a {
+  #button-5:hover .log {
     color: #333758ee;
   }
 

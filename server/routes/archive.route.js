@@ -7,7 +7,7 @@ const archiveController = require("../controller/archive.controller");
 router.get("/", archiveController.getTaskList);
 
 //delete archive
-router.delete("/:id", archiveController.deleteTask);
+router.delete("/", archiveController.archivedTask);
 
 
 

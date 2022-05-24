@@ -1,15 +1,15 @@
 var dbConn = require("../config/db.config");
 
 var EMPArchive = function (emparchive) {
-    this.cin = employee.cin;
-    this.first_name = employee.first_name;
-    this.last_name = employee.last_name;
-    this.email = employee.email;
-    this.phone = employee.phone;
-    this.city = employee.city;
-    this.zip = employee.zip;
-    this.dep = employee.dep;
-    this.password = employee.password;
+    this.cin = emparchive.cin;
+    this.first_name = emparchive.first_name;
+    this.last_name = emparchive.last_name;
+    this.email = emparchive.email;
+    this.phone = emparchive.phone;
+    this.city = emparchive.city;
+    this.zip = emparchive.zip;
+    this.dep = emparchive.dep;
+    this.password = emparchive.password;
 };
 
 EMPArchive.getAllEMP = (result) => {
@@ -24,17 +24,18 @@ EMPArchive.getAllEMP = (result) => {
     });
 };
 
-
 EMPArchive.deleteEMP = (result) => {
-    dbConn.query("TRUNCATE  table emparchive ", (err, res) => {
+    dbConn.query("DELETE from employees where state='inactive' ", (err, res) => {
         if (err) {
             console.log("Error while deleting the EMP");
             result(null, err);
         }
         else {
-            console.log("Employee archive archivedd successfully", res);
+            console.log("Employee archive deleted successfully", res);
 
         }
     });
 };
+
+
 module.exports = EMPArchive;

@@ -14,7 +14,7 @@ function EmployeeArchive() {
       }
 // On Page load display all records
     const loademployeeDetail = async () => {
-        axios.get(`http://localhost:5000/api/v1/archiveEMP`).then((response) => {
+      await  axios.get(`http://localhost:5000/api/v1/archiveEMP`).then((response) => {
             setRecord(response.data);
         });
     };
@@ -49,13 +49,12 @@ function EmployeeArchive() {
    
     return (
         <div className="wallpaper w3-display-container w3-animate-opacity w3-text-white">
-
-        <section>
-                <h4 className="mb-3 text-center mt-4">
+            <section>
+                <h1 className="mb-4 text-center mt-4" style={{ marginLeft: "7%", fontSize: "60px" }}>
                     Employee archive
-                </h4>
-                    <div className="col-sm-8">
-                    <Button variant="primary" onClick={()=>{refreshPage(); createHistory();
+                </h1>
+                    <div className="col-sm-11">
+                    <button className="btn btn-danger" style={{ marginLeft: "3.5%", marginTop: "12%" }}  onClick={()=>{refreshPage(); createHistory();
                                                        const confirmBox =
                                                         window.confirm(
                                                             "Do you really want to archived all this archive ?" 
@@ -67,7 +66,7 @@ function EmployeeArchive() {
                                                    
                                                     }} >
                        archived if you want
-                       </Button>
+                       </button>
                        <div className="input-group mb-4 mt-3">
                         </div>
                     <table className="table table-striped" style={{ marginLeft: "1%", width: "90%" }} >

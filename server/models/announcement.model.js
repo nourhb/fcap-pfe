@@ -9,7 +9,7 @@ var Announcement = function (announcement) {
 
 // get all announcements
 Announcement.getAllAnnouncements = (result) => {
-    dbConn.query("SELECT * FROM announcement  order by id desc Limit 4 ", (err, res) => {
+    dbConn.query("SELECT * FROM announcement  order by id desc  ", (err, res) => {
         if (err) {
             console.log("Error while fetching announcement", err);
             result(null, err);

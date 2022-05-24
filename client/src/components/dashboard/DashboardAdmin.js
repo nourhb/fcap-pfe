@@ -1,8 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-function DashboardAdmin() {
-	return (
-	<div> </div>)
+export default function DashboardAdmin() {
+  return (
+	<div>DashboardAdmin</div>
+  )
 }
-
-export default DashboardAdmin;

@@ -5,10 +5,12 @@ import axios from "axios";
 import '../login.css'
 import Typed from "react-typed";
 import ErrorBox from '../ErrorBox';
+import ContactUs from './ContactUs';
 
 function Login() {
-	
-	const [user, setUser] = useState({cin: null,password: null});
+  const [modalShowcontact, setModalShowcontact] = useState(false);
+
+	const [user, setUser] = useState({cin:"",password: ""});
 
 	let navigate = useNavigate()
 
@@ -49,18 +51,18 @@ const onInputChange = (e) => {
 
 	return (
 		
-    <div class="imgLogin " >
-    <section class="ftco-sectionLogin">
-      <div class="containerLogin">
-        <div class="rowLogin justify-content-center-login">
-          <div class="col-md-6 text-center mb-5">
+    <div className="imgLogin " >
+      <section className="ftco-sectionLogin">
+        <div className="containerLogin">
+          <div className="rowLogin justify-content-center-login">
+            <div className="col-md-6 text-center mb-5">
           </div>
         </div>
-        <div class="rowLogin justify-content-center-login">
-          <div class="col-md-6 col-lg-4">
-            <div class="login-wrap ">
+          <div className="rowLogin justify-content-center-login">
+            <div className="col-md-6 col-lg-4">
+              <div className="login-wrap ">
               <div>
-              <h1 className="heading-section"><Typed
+                  <h1 className="heading-section"><Typed
           strings={[
             "Welcome to login page",
           ]}
@@ -71,8 +73,8 @@ const onInputChange = (e) => {
             </div>
             <br/>
               <form action="#" >
-                <div className="form-groupLogin">
-                  <input  type="number"  class="form-controlInput " placeholder="Cin" required name="cin"
+                  <div className="form-groupLogin">
+                    <input type="number" className="form-controlInput " placeholder="Cin" required name="cin"
            value={cin}
             onChange={(e) => onInputChange(e)}/>
                 {
@@ -82,14 +84,14 @@ const onInputChange = (e) => {
                 </div>
                 <div className="form-groupLogin *">
                   
-                  <input id="password-field" type="password" class="form-controlInput" placeholder="Password" required="required"
+                    <input id="password-field" type="password" className="form-controlInput" placeholder="Password" required="required"
                    name="password"
                    
                    value={password}
                                   onChange={(e) => onInputChange(e)}/>
                   <span ></span>
                 </div>
-                <div class="form-groupLogin" >
+                  <div className="form-groupLogin" >
                   <button type="submit" className="submitLogin" style={{justifyContent:'center'}}
                   onClick={(e) =>  submitLogin (e)}>Login</button>
                 </div>
@@ -102,10 +104,17 @@ const onInputChange = (e) => {
     </section>
       <div id="flamelab-convo-widget">
         <img src="https://clepstep.com/wp-content/uploads/avataaars.png" style={{ width: "173px" }} alt="Avatar Image" />
-        <div class="flamelab-cw-msg-box">
+        <div className="flamelab-cw-msg-box">
           <span>Hey! in case you forget your password please contact the admin </span>
-          <div class="flamelab-cw-buttons">
-            <a href="/" target="_blank" class="flamelab-cw-button flamelab-cw-button-yes">contact admin</a>
+          <div className="flamelab-cw-buttons">
+            <button className=" btn btn-info btn-sm mr-2" onClick={() => setModalShowcontact(true)}>contact admin</button>
+
+
+            
+            <ContactUs
+              show={modalShowcontact}
+              onHide={() => setModalShowcontact(false)}
+            />
           </div>
         </div>
 

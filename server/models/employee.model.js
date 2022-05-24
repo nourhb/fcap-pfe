@@ -33,7 +33,7 @@ Employee.getAllEmployees = (result) => {
 // get employee by Name for Search Data by name
 Employee.getEmployeeByName = (first_name, result) => {
     dbConn.query(
-        " * FROM employees WHERE first_name=?",
+        " Select * FROM employees WHERE first_name=?",
         first_name,
         (err, res) => {
             if (err) {
@@ -112,14 +112,14 @@ Employee.updateEmployee = (id, employeeReqData, result) => {
 };
 
 Employee.ArchiveEmployee = (id, result) => {
-    dbConn.query("UPDATE employees SET etat = 'inactive'WHERE id=?", [id], (err, res) => {
+    dbConn.query("UPDATE employees SET state = 'inactive' WHERE id=?", [id], (err, res) => {
         if (err) {
             console.log("Error while deleting the employee");
             result(null, err);
         } else {
             result(null, res);
         }
-        
+
     });
 }
 

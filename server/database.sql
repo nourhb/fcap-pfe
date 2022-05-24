@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 22 mai 2022 à 09:34
+-- Généré le : mar. 24 mai 2022 à 14:00
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `announcement` (
   `title` varchar(225) NOT NULL,
   `description` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `announcement`
@@ -54,7 +54,10 @@ INSERT INTO `announcement` (`id`, `title`, `description`) VALUES
 (34, 'hi', 'hihihih'),
 (35, 'Oh hi i\'m random task', 'hello'),
 (36, '19', '19'),
-(37, 'Hola', 'Boooooooo');
+(37, 'Hola', 'Boooooooo'),
+(38, 'nnnnnnnnnnnnnnnn', 'nnnnnnnnnnnnnnnnnnnnnnn'),
+(39, 'nnnnnnnnnnnnnnnn', 'nnnnnnnnnnnnnnnnnnnnnnn'),
+(40, 'good morning guys this is a new announcement', 'please make sure to check the expired tasks ');
 
 -- --------------------------------------------------------
 
@@ -138,11 +141,11 @@ CREATE TABLE IF NOT EXISTS `employees` (
 -- Déchargement des données de la table `employees`
 --
 
-INSERT INTO `employees` (`cin`, `id`, `first_name`, `last_name`, `user_name`, `email`, `phone`, `city`, `zip`, `dep`, `password`, `initialid`, `roles`) VALUES
-(11111111, 171, 'saoussen', 'ben chaabene', 'saoussen ben chaabene', 'saoussen@gmail.com', '0124598755', 'souse', '5190', 2, '$2a$10$g5Dlb5uozmifo./OGk7i6e0Rs46uBsCPsSY3W3rxue2M1nOkgxaJq', 'sb-7', 'INFORMATION_TECHNOLOGIES'),
-(12345678, 172, 'sirine', 'zouari', 'sirine zouari', 'sirinezouari@gmail.com', '12345678', 'ousse', '4000', 3, '$2a$10$vjrMQKo7rAoDi0wn0nZSXeIH1A04viVRWuPsc8owKHSdKtZhfvrXu', 'sz-8', 'ACCOUNTING'),
-(12868233, 192, 'Saoussen', 'Châabane', 'Saoussen Châabane', 'saoussen113@gmail.com', '+21628456262', 'Sousse', '4011', 1, '$2a$10$wOqlZK63wBzZ/tw6Jte2Fu2WBcMoM725yF/kW.B7tR0rmlLfSyQnS', 'SC-3', 'ADMIN'),
-(11836030, 193, 'nour elhouda ', 'bouajila', 'nour elhouda  bouajila', 'nourhb58@gmail.com', '+21653724194', 'mahdia', '5190', 1, '$2a$10$TEK2CKd5wX.45va74U6No.IxSMzvgjHchKA.oOX273VhQLjaa8pBq', 'nb-9', 'ADMIN');
+INSERT INTO `employees` (`cin`, `id`, `first_name`, `last_name`, `user_name`, `email`, `phone`, `city`, `zip`, `dep`, `password`, `initialid`, `roles`, `state`) VALUES
+(11111111, 171, 'saoussen', 'ben chaabene', 'saoussen ben chaabene', 'saoussen@gmail.com', '0124598755', 'souse', '5190', 2, '$2a$10$g5Dlb5uozmifo./OGk7i6e0Rs46uBsCPsSY3W3rxue2M1nOkgxaJq', 'sb-7', 'INFORMATION_TECHNOLOGIES', 'inactive'),
+(12345678, 172, 'sirine', 'zouari', 'sirine zouari', 'sirinezouari@gmail.com', '12345678', 'ousse', '4000', 3, '$2a$10$vjrMQKo7rAoDi0wn0nZSXeIH1A04viVRWuPsc8owKHSdKtZhfvrXu', 'sz-8', 'ACCOUNTING', 'active'),
+(12868233, 192, 'Saoussen', 'Châabane', 'Saoussen Châabane', 'saoussen113@gmail.com', '+21628456262', 'Sousse', '4011', 1, '$2a$10$wOqlZK63wBzZ/tw6Jte2Fu2WBcMoM725yF/kW.B7tR0rmlLfSyQnS', 'SC-3', 'ADMIN', 'active'),
+(11836030, 193, 'nour elhouda ', 'bouajila', 'nour elhouda  bouajila', 'nourhb58@gmail.com', '+21653724194', 'mahdia', '5190', 1, '$2a$10$TEK2CKd5wX.45va74U6No.IxSMzvgjHchKA.oOX273VhQLjaa8pBq', 'nb-9', 'ADMIN', 'active');
 
 --
 -- Déclencheurs `employees`
@@ -152,6 +155,14 @@ DELIMITER $$
 CREATE TRIGGER `before_employee_delete` BEFORE DELETE ON `employees` FOR EACH ROW BEGIN
     INSERT INTO emparchive(cin,id,first_name,last_name,user_name,email,phone,city,zip,dep,password,initialid,roles) VALUES(OLD.cin,OLD.id,OLD.first_name,OLD.last_name,OLD.user_name,OLD.email,OLD.phone,OLD.city,OLD.zip,OLD.dep,OLD.password,OLD.initialid,OLD.roles);
 END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `delete_login`;
+DELIMITER $$
+CREATE TRIGGER `delete_login` AFTER UPDATE ON `employees` FOR EACH ROW DELETE login
+FROM login 
+INNER JOIN employees t2 ON login.cin = t2.cin
+WHERE t2.state IN ('inactive')
 $$
 DELIMITER ;
 
@@ -168,14 +179,43 @@ CREATE TABLE IF NOT EXISTS `history` (
   `user` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `time` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `history`
 --
 
 INSERT INTO `history` (`id`, `operation`, `user`, `time`) VALUES
-(1, 'Edit task', 'ADMIN', '21/05/2022, 15:42:35');
+(1, 'Edit task', 'ADMIN', '21/05/2022, 15:42:35'),
+(2, 'Add announcement', 'ADMIN', '23/05/2022, 16:57:07'),
+(3, 'Add announcement', 'ADMIN', '23/05/2022, 16:57:28'),
+(4, 'Edit task', 'ADMIN', '24/05/2022, 09:13:38'),
+(5, 'Edit task', 'ADMIN', '24/05/2022, 09:15:37'),
+(6, 'Edit task', 'ADMIN', '24/05/2022, 09:17:28'),
+(7, 'Edit task', 'ADMIN', '24/05/2022, 09:18:17'),
+(8, 'Add task', 'ADMIN', '24/05/2022, 09:19:36'),
+(9, 'Edit task', 'ADMIN', '24/05/2022, 09:23:32'),
+(10, 'Edit task', 'ADMIN', '24/05/2022, 09:23:39'),
+(11, 'Edit task', 'ADMIN', '24/05/2022, 09:23:44'),
+(12, 'Edit task', 'ADMIN', '24/05/2022, 09:23:50'),
+(13, 'Edit task', 'ADMIN', '24/05/2022, 09:23:56'),
+(14, 'Edit task', 'ADMIN', '24/05/2022, 09:24:02'),
+(15, 'Edit task', 'ADMIN', '24/05/2022, 09:24:08'),
+(16, 'Edit task', 'ADMIN', '24/05/2022, 09:24:14'),
+(17, 'Edit task', 'ADMIN', '24/05/2022, 09:24:21'),
+(18, 'Edit task', 'ADMIN', '24/05/2022, 09:24:29'),
+(19, 'Edit task', 'ADMIN', '24/05/2022, 09:24:36'),
+(20, 'Edit task', 'ADMIN', '24/05/2022, 09:24:42'),
+(21, 'Edit task', 'ADMIN', '24/05/2022, 09:24:46'),
+(22, 'Edit task', 'ADMIN', '24/05/2022, 09:24:52'),
+(23, 'Edit task', 'ADMIN', '24/05/2022, 09:24:57'),
+(24, 'Edit task', 'ADMIN', '24/05/2022, 09:25:06'),
+(25, 'Edit task', 'ADMIN', '24/05/2022, 09:25:13'),
+(26, 'Edit task', 'ADMIN', '24/05/2022, 09:25:18'),
+(27, 'Edit task', 'ADMIN', '24/05/2022, 09:25:24'),
+(28, 'Archive task', 'ADMIN', '24/05/2022, 11:48:23'),
+(29, 'Archive task', 'ADMIN', '24/05/2022, 11:49:39'),
+(30, 'Add announcement', 'ADMIN', '24/05/2022, 12:41:15');
 
 -- --------------------------------------------------------
 
@@ -202,6 +242,30 @@ INSERT INTO `idea` (`id`, `idea`) VALUES
 (6, 'U\'r so beautiful today!!'),
 (7, 'Wish U all the best <33333'),
 (8, 'Welcome Home!!');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `login`
+--
+
+DROP TABLE IF EXISTS `login`;
+CREATE TABLE IF NOT EXISTS `login` (
+  `cin` int NOT NULL,
+  `user_id` varchar(225) DEFAULT NULL,
+  `password` varchar(225) NOT NULL,
+  PRIMARY KEY (`cin`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `login`
+--
+
+INSERT INTO `login` (`cin`, `user_id`, `password`) VALUES
+(11111111, 'sb-7', '$2a$10$g5Dlb5uozmifo./OGk7i6e0Rs46uBsCPsSY3W3rxue2M1nOkgxaJq'),
+(11836030, 'nb-9', '$2a$10$TEK2CKd5wX.45va74U6No.IxSMzvgjHchKA.oOX273VhQLjaa8pBq'),
+(12345678, 'sz-8', '$2a$10$vjrMQKo7rAoDi0wn0nZSXeIH1A04viVRWuPsc8owKHSdKtZhfvrXu'),
+(12868233, 'SC-3', '$2a$10$wOqlZK63wBzZ/tw6Jte2Fu2WBcMoM725yF/kW.B7tR0rmlLfSyQnS');
 
 -- --------------------------------------------------------
 
@@ -341,16 +405,26 @@ CREATE TABLE IF NOT EXISTS `selectedtask` (
   `wasted_time` time DEFAULT NULL,
   `count` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `selectedtask`
 --
 
 INSERT INTO `selectedtask` (`id`, `taskid`, `dep_id`, `user_id`, `added_at`, `status`, `first_check`, `last_check`, `real_time`, `execution_duration`, `pause_duration`, `estimated_time`, `wasted_time`, `count`) VALUES
-(60, 'D-ta4', 1, '11836030', '2022-05-22 01:52:03', 1, '01:52:03', '01:52:03', '01:48:10', '01:48:42', NULL, '00:00:05', NULL, 0),
-(61, 'D-ta2', 1, '11836030', '2022-05-22 01:48:32', 3, NULL, '01:48:32', '01:48:32', '01:50:18', NULL, '00:00:01', NULL, NULL),
-(62, 'D-da51', 1, '11836030', '2022-05-22 01:49:36', 3, NULL, '01:49:36', '01:49:36', '01:50:10', NULL, '00:00:05', NULL, NULL);
+(77, 'D-ta4', 1, '11836030', '2022-05-24 09:23:33', 3, '09:10:46', '09:10:48', '00:00:02', '00:00:02', '00:00:00', '00:05:00', '00:00:03', 0),
+(79, 'D-ta2', 1, '11836030', '2022-05-24 13:30:24', 3, '13:30:22', '13:30:24', '00:00:02', '00:00:02', '00:00:00', '00:01:00', '00:01:00', 0);
+
+--
+-- Déclencheurs `selectedtask`
+--
+DROP TRIGGER IF EXISTS `reset_task_checked_status`;
+DELIMITER $$
+CREATE TRIGGER `reset_task_checked_status` AFTER DELETE ON `selectedtask` FOR EACH ROW update task
+set task.status_checked  = 0
+WHERE task.taskid not in (select taskid from selectedtask)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -367,9 +441,9 @@ CREATE TABLE IF NOT EXISTS `task` (
   `instruction` varchar(200) NOT NULL,
   `duration` time NOT NULL,
   `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `status` int NOT NULL DEFAULT '0',
+  `status_checked` int NOT NULL DEFAULT '0',
+  `state` varchar(225) NOT NULL DEFAULT 'active',
   `date_frame` date NOT NULL DEFAULT (curdate()),
-   `state` varchar(225) NOT NULL DEFAULT 'active',
   PRIMARY KEY (`id`),
   UNIQUE KEY `taskid` (`taskid`),
   KEY `department` (`dep`)
@@ -379,26 +453,26 @@ CREATE TABLE IF NOT EXISTS `task` (
 -- Déchargement des données de la table `task`
 --
 
-INSERT INTO `task` (`id`, `taskid`, `dep`, `title`, `instruction`, `duration`, `type`, `status`, `date_frame`) VALUES
-(201, 'D-ta4', 1, 'task1', 'task1', 5, 'Daily', 1, '2022-05-22'),
-(202, 'D-ta2', 1, 'task2', 'task2', 1, 'Daily', 1, '2022-05-22'),
-(203, 'D-ta10', 1, 'task3', 'task3', 1, 'Daily', 0, '2022-05-22'),
-(206, 'D-da10', 1, 'daily task4 ', 'daily task4', 4, 'Daily', 1, '2022-05-22'),
-(208, 'D-da51', 1, 'daily task5', 'daily task5', 5, 'Daily', 1, '2022-05-22'),
-(209, 'D-ta7', 1, 'task 7', 'task7 ', 7, 'Daily', 1, '2022-05-22'),
-(210, 'D-ta21', 1, 'task 6', 'task 6', 6, 'Daily', 0, '2022-05-22'),
-(211, 'W-w 67', 1, 'w task1', 'w task1', 11, 'Weekly', 0, '2022-05-22'),
-(214, 'W-w 44', 1, 'w task2 ', 'w task2', 2, 'Weekly', 0, '2022-05-23'),
-(215, 'W-w 36', 1, 'w task3', 'w task3', 3, 'Weekly', 0, '2022-05-24'),
-(216, 'W-w 82', 1, 'w task 4', 'w task 4', 4, 'Weekly', 0, '2022-05-25'),
-(217, 'W-w 64', 1, 'w task 5', 'w task 5', 5, 'Weekly', 0, '2022-05-26'),
-(218, 'W-w 11', 1, 'w task 6', 'w task 6', 6, 'Weekly', 0, '2022-05-27'),
-(219, 'W-w 45', 1, 'w task 7', 'w task 7', 7, 'Weekly', 0, '2022-05-28'),
-(220, 'W-w 59', 1, 'w task 8', 'w task 8', 8, 'Weekly', 0, '2022-05-22'),
-(221, 'M-m 27', 1, 'm task 1', 'm task 1', 1, 'Monthly', 0, '2022-05-01'),
-(222, 'M-m 87', 1, 'm task 2', 'm task 2', 2, 'Monthly', 0, '2022-05-02'),
-(223, 'M-m 82', 1, 'm task 3', 'm task 3', 3, 'Monthly', 0, '2022-05-03'),
-(225, 'I-i 12', 1, 'i task 1', 'i task 1', 1, 'Instant', 0, '2022-05-16');
+INSERT INTO `task` (`id`, `taskid`, `dep`, `title`, `instruction`, `duration`, `type`, `status_checked`, `state`, `date_frame`) VALUES
+(201, 'D-ta4', 1, 'task1', 'task1', '00:05:00', 'Daily', 1, 'inactive', '2022-05-24'),
+(202, 'D-ta2', 1, 'task2', 'task2', '00:01:00', 'Daily', 1, 'active', '2022-05-24'),
+(203, 'D-ta10', 1, 'task3', 'task3', '00:07:00', 'Daily', 0, 'active', '2022-05-24'),
+(206, 'D-da10', 1, 'daily task4 ', 'daily task4', '00:12:00', 'Daily', 0, 'active', '2022-05-24'),
+(208, 'D-da51', 1, 'daily task5', 'daily task5', '00:05:00', 'Daily', 0, 'active', '2022-05-24'),
+(209, 'D-ta7', 1, 'task 7', 'task7 ', '00:07:00', 'Daily', 0, 'active', '2022-05-24'),
+(210, 'D-ta21', 1, 'task 6', 'task 6', '00:06:00', 'Daily', 0, 'active', '2022-05-24'),
+(211, 'W-w 67', 1, 'w task1', 'w task1', '00:11:00', 'Weekly', 0, 'active', '2022-05-22'),
+(214, 'W-w 44', 1, 'w task2 ', 'w task2', '00:12:00', 'Weekly', 0, 'active', '2022-05-23'),
+(215, 'W-w 36', 1, 'w task3', 'w task3', '00:13:00', 'Weekly', 0, 'active', '2022-05-24'),
+(216, 'W-w 82', 1, 'w task 4', 'w task 4', '00:14:00', 'Weekly', 0, 'active', '2022-05-25'),
+(217, 'W-w 64', 1, 'w task 5', 'w task 5', '00:15:00', 'Weekly', 0, 'active', '2022-05-26'),
+(218, 'W-w 11', 1, 'w task 6', 'w task 6', '00:06:00', 'Weekly', 0, 'active', '2022-05-27'),
+(219, 'W-w 45', 1, 'w task 7', 'w task 7', '00:17:00', 'Weekly', 0, 'active', '2022-05-28'),
+(220, 'W-w 59', 1, 'w task 8', 'w task 8', '00:08:00', 'Weekly', 0, 'active', '2022-05-22'),
+(221, 'M-m 27', 1, 'm task 1', 'm task 1', '00:10:00', 'Monthly', 0, 'active', '2022-05-01'),
+(222, 'M-m 87', 1, 'm task 2', 'm task 2', '00:20:00', 'Monthly', 0, 'active', '2022-05-02'),
+(223, 'M-m 82', 1, 'm task 3', 'm task 3', '00:30:00', 'Monthly', 0, 'active', '2022-05-03'),
+(225, 'I-i 12', 1, 'i task 1', 'i task 1', '00:15:00', 'Instant', 0, 'active', '2022-05-16');
 
 -- --------------------------------------------------------
 
@@ -421,18 +495,9 @@ CREATE TABLE IF NOT EXISTS `taskarchive` (
 ) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DELIMITER $$
-
---trigger
-/*CREATE TRIGGER delete_login AFTER UPDATE ON employees
- FOR EACH ROW DELETE login
-FROM login 
-INNER JOIN employees t2 ON login.cin = t2.cin
-WHERE t2.state IN ('inactive')*/
+--
 -- Évènements
 --
-/*CREATE DEFINER=root@localhost EVENT Insert_login ON SCHEDULE EVERY 1 SECOND STARTS '2022-05-23 14:56:23' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO login(cin,user_id,password)
-SELECT cin,initialid,password FROM employees
-WHERE cin not in(SELECT cin FROM login)*/
 DROP EVENT IF EXISTS `depname`$$
 CREATE DEFINER=`root`@`localhost` EVENT `depname` ON SCHEDULE EVERY 1 SECOND STARTS '2022-04-07 10:56:13' ON COMPLETION NOT PRESERVE ENABLE DO update employees 
 join   department 
@@ -458,6 +523,15 @@ join   task
 on  selectedtask.taskid = task.taskid 
 set selectedtask.estimated_time= task.duration 
 where selectedtask.taskid = task.taskid$$
+
+DROP EVENT IF EXISTS `Insert_login`$$
+CREATE DEFINER=`root`@`localhost` EVENT `Insert_login` ON SCHEDULE EVERY 1 SECOND STARTS '2022-05-23 14:56:23' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO login(cin,user_id,password)
+SELECT cin,initialid,password FROM employees
+WHERE cin not in(SELECT cin FROM login)$$
+
+DROP EVENT IF EXISTS `reset_table selected_task`$$
+CREATE DEFINER=`root`@`localhost` EVENT `reset_table selected_task` ON SCHEDULE EVERY 24 HOUR STARTS '2022-05-24 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO delete from selectedtask where selectedtask.status <3$$
+
 DELIMITER ;
 COMMIT;
 

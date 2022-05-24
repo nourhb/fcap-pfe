@@ -12,7 +12,7 @@ function History() {
 
     // On Page load display all records
     const loadHistory = async () => {
-        axios.get(`http://localhost:5000/api/v1/history`).then((response) => {
+        await axios.get(`http://localhost:5000/api/v1/history`).then((response) => {
             setRecord(response.data);
         });
     };
@@ -22,9 +22,9 @@ function History() {
 
 
     // Search Records here
-    const searchRecords = () => {
+    const searchRecords = async () => {
         alert(search);
-        axios
+        await axios
             .get(`http://localhost:5000/api/v1/history/searchRecord/${search}`)
             .then((response) => {
                 setRecord(response.data);
@@ -32,8 +32,8 @@ function History() {
     };
 
 
-    const deleteRecord = () => {
-        axios
+    const deleteRecord = async () => {
+        await axios
             .delete(`http://localhost:5000/api/v1/history`)
             .then((result) => {
                 swal({
@@ -49,64 +49,61 @@ function History() {
     };
 
     return (
-        <div className="wallpaper ">
+        <div className="wallpaper w3-display-container w3-animate-opacity w3-text-white">
+            <section>
+                <h1 style={{ marginLeft: "45%", fontSize: "60px" }}>
+                    History
+                </h1>
+                <div className="col-sm-11">
+                    <div className="history" />
+                    <div className="folder" />
+                    <button style={{ marginLeft: "3.5%" }} className="btn btn-outline-danger"
+                        onClick={() => {
+                            const confirmBox = window.confirm("Do you really want to delete all the history ?");
+                            if (confirmBox === true) {
+                                deleteRecord();
+                            } else {
+                                swal({ title: "Don't worry, it won't be deleted!" });
+                            }
 
-        <section>
-            <h1 className="mb-4 text-center mt-4">
-                History
-            </h1>
-            <div><div className="history" />
-                <div className="folder" />
+                        }}>delete history archive
+                    </button>
 
-
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                <button className="btn btn-outline-danger"
-                    onClick={() => {
-                        const confirmBox = window.confirm("Do you really want to delete all the history ?");
-                        if (confirmBox === true) {
-                            deleteRecord();
-                        } else {
-                            swal({ title: "Don't worry, it won't be deleted!" });
-                        }
-
-                    }}>delete history archive
-                </button>
-
-                <div className="input-group mb-4 mt-3">
-                    <div className="form-outline">
-                        < div id='search'>
-                            <div className="search-box">
-                                <button className="btn-search" type="button"
-                                    onClick={searchRecords}><ImSearch id="btnsearch" /></button>
-                                <input type="text" className="input-search" placeholder="Type to Search..."
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    required={true} /></div>
+                    <div className="input-group mb-4 mt-3">
+                        <div className="form-outline" style={{ marginLeft: "3.5%" }}>
+                            < div id='search' >
+                                <div className="search-box">
+                                    <button className="btn-search" type="button"
+                                        onClick={searchRecords}><ImSearch id="btnsearch" /></button>
+                                    <input type="text" className="input-search" placeholder="Type to Search..."
+                                        onChange={(e) => setSearch(e.target.value)}
+                                        required={true} /></div>
+                            </div>
                         </div>
-                    </div></div>
-                <table className="table table-striped" style={{ marginLeft: "1%", width: "90%" }} >
-                    <thead>
-                        <tr className="table-success">
-                            <th>id</th>
-                            <th> operation</th>
-                            <th>user</th>
-                            <th>time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {record.map((name, index) => (
-                            <tr className="table-warning" key={index}>
-                                <td>{name.id}</td>
-                                <td>{name.operation}</td>
-                                <td>{name.user}</td>
-                                <td>{name.time}</td>
+                    </div>
+                    <table className="table table-striped " style={{ marginLeft: "5%", width: "100%" }} >
+                        <thead>
+                            <tr className="table-success">
+                                <th>id</th>
+                                <th> operation</th>
+                                <th>user</th>
+                                <th>time</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {record.map((name, index) => (
+                                <tr className="table-warning" key={index}>
+                                    <td>{name.id}</td>
+                                    <td>{name.operation}</td>
+                                    <td>{name.user}</td>
+                                    <td>{name.time}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
-        </section></div>
+            </section></div>
     );
 }
 

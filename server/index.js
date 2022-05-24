@@ -63,11 +63,11 @@ app.use("/api/v1/todo", TodoRoutes);
 
 
 // import archive routes
-/*const archiveRoutes = require("./routes/archive.route");
+const archiveRoutes = require("./routes/archive.route");
 // create archive routes
-app.use("/api/v1/archive_task", archiveRoutes);*/
+app.use("/api/v1/archive_task", archiveRoutes);
 
 // import archive routes
-/*const archiveEMPRoutes = require("./routes/archiveEMP.route");
+const archiveEMPRoutes = require("./routes/archiveEMP.route");
 // create archive routes
-app.use("/api/v1/archiveEMP", archiveEMPRoutes);*/
+app.use("/api/v1/archiveEMP", archiveEMPRoutes);

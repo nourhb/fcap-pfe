@@ -44,7 +44,7 @@ function Addtaskmodal(props) {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   const getTask = async () => {
-    axios.get(`http://localhost:5000/api/v1/task`).then((response) => {
+    await axios.get(`http://localhost:5000/api/v1/task`).then((response) => {
       setRecord(response.data);
     });
   };

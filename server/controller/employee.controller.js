@@ -8,7 +8,7 @@ exports.getEmployeeList = (req, res) => {
         console.log("We are here");
         if (err) res.send(err);
         // console.log("Employees", employees);
-        res.status(200).json(employees.reverse());
+        res.status(200).json(employees);
     });
 };
 

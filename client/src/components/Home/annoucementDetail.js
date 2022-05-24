@@ -25,16 +25,6 @@ function AnnouncementDetail() {
     const onInputChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
-    // On Page load display all records
-    const loadAnnouncementDetail = async () => {
-        axios.get(`http://localhost:5000/api/v1/announcement`).then((response) => {
-            setRecord(response.data);
-        });
-    };
-    useEffect(() => {
-        loadAnnouncementDetail();
-    }, []);
-
     // Insert announcement Records
     const submitAnnouncementRecord = async (e) => {
         e.preventDefault();
@@ -77,8 +67,8 @@ function AnnouncementDetail() {
                     value={description}
                     onChange={(e) => onInputChange(e)}
                 /><br />
-                <button class="IDbtn" type="submit" onClick={() => { createHistory(); HandleClick() }} style={{ marginLeft: "15px", marginRight: "40px" }}>Publish</button>
-                <button type="button" class="IDbtn" onClick={refreshPage} style={{ marginLeft: "15px", marginRight: "15px" }}>Refrech</button>
+                <button className="IDbtn" type="submit" onClick={() => { createHistory(); HandleClick() }} style={{ marginLeft: "15px", marginRight: "40px" }}>Publish</button>
+                <button type="button" className="IDbtn" onClick={refreshPage} style={{ marginLeft: "15px", marginRight: "15px" }}>Refrech</button>
             </form> </div>
     );
 }

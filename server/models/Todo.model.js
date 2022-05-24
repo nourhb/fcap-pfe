@@ -41,7 +41,7 @@ Todo.getStatus = (id, result) => { //data = req.body
 };
 
 Todo.addselectedtask = (data, result) => {
-    const { taskid, dep, userid } = data; 
+    const { taskid, dep, userid } = data;
 
     const time = moment().format('YYYY-MM-DD , hh:mm:ss');
     dbConn.query("INSERT INTO selectedtask (taskid,dep_id,user_id,added_at,status) VALUES (?,?,?,?,?)",
@@ -64,7 +64,7 @@ Todo.firstStatus = (id, result) => {
             console.log("Error while update status", err);
             result(null, err);
         } else {
-            dbConn.query("UPDATE task SET status = 1 WHERE taskid=? ", [id]);
+            dbConn.query("UPDATE task SET status_checked = 1 WHERE taskid=? ", [id]);
 
             result(null, res);
             console.log(" update status", res);
@@ -75,40 +75,37 @@ Todo.firstStatus = (id, result) => {
 }
 
 Todo.secondStatus = (id, result) => {
-            dbConn.query("SELECT * FROM selectedtask where taskid=?", [id], (err, res) => {
-                let last_check = res[0][`last_check`];
-                let first_check = res[0][`first_check`];
-                let exe_duration = res[0][`execution_duration`];
-
-                let now = moment().format("HH:mm:ss");
-                let real_time = soustractTimes(now, first_check);
-                let execution = soustractTimes(now, last_check);
-                let execution_duration = addTimes(execution, exe_duration);
-                console.log(execution_duration, 'and', execution, 'and', real_time)
+    dbConn.query("SELECT * FROM selectedtask where taskid=?", [id], (err, res) => {
+        let last_check = res[0][`last_check`];
+        let first_check = res[0][`first_check`];
+        let exe_duration = res[0][`execution_duration`];
+        let now = moment().format("HH:mm:ss");
+        let real_time = soustractTimes(now, first_check);
+        let execution = soustractTimes(now, last_check);
+        let execution_duration = addTimes(execution, exe_duration);
+        if (err) {
+            console.log("Error while fetching tasks", err);
+            result(null, err);
+        } else {
+            dbConn.query("UPDATE selectedtask SET status =2 ,count=(count+1),execution_duration=?  WHERE taskid=?", [execution_duration, id], (err, res) => {
                 if (err) {
-                    console.log("Error while fetching tasks", err);
+                    console.log("Error while update status", err);
                     result(null, err);
                 } else {
-                    dbConn.query("UPDATE selectedtask SET status =2 ,count=1 ,	execution_duration=?  WHERE taskid=?", [real_time, execution_duration, id], (err, res) => {
-                        if (err) {
-                            console.log("Error while update status", err);
-                            result(null, err);
-                        } else {
-                            result(null, res);
-                            console.log(" update status");
+                    result(null, res);
+                    console.log(" update status");
 
-                        }
-
-                    });
-                    console.log("task done successfully");
                 }
             });
-
+            console.log("task done successfully");
         }
-    
+    });
+
+}
+
 
 Todo.thirdStatus = (id, result) => {
-    dbConn.query("UPDATE selectedtask SET status = 2, count=(count+1) , last_check = current_time  WHERE taskid=?", [id], (err, res) => {
+    dbConn.query("UPDATE selectedtask SET status = 1 , last_check = current_time  WHERE taskid=?", [id], (err, res) => {
         if (err) {
             console.log("Error while update status", err);
             result(null, err);
@@ -255,24 +252,24 @@ Todo.fourthStatus = (id, result) => {
         let exe_duration = res[0][`execution_duration`];
         let pauseT = res[0][`pause_duration`];
         let estimated_time = res[0][`estimated_time`];
-       
+
 
 
         let now = moment().format("HH:mm:ss");
         let real_time = soustractTimes(now, first_check);
         let execution = soustractTimes(now, last_check);
-        let execution_duration = addTimes(execution , exe_duration);
+        let execution_duration = addTimes(execution, exe_duration);
         let pause = soustractTimes(real_time, execution_duration);
-        let pause_duration = addTimes(pauseT,pause);
-        let wasted_time= soustractTimes(estimated_time, execution_duration);
+        let pause_duration = addTimes(pauseT, pause);
+        let wasted_time = soustractTimes(estimated_time, execution_duration);
 
 
-        console.log(execution_duration ,'and',execution,'and', real_time  )
+        console.log(execution_duration, 'and', execution, 'and', real_time)
         if (err) {
             console.log("Error while fetching tasks", err);
             result(null, err);
         } else {
-            dbConn.query("UPDATE selectedtask SET status =3 ,real_time=?, 	execution_duration=? ,last_check=current_time, pause_duration=? , wasted_time=?   WHERE taskid=?", [real_time, execution_duration, pause_duration, wasted_time,id], (err, res) => {
+            dbConn.query("UPDATE selectedtask SET status =3 ,real_time=?, 	execution_duration=? ,last_check=current_time, pause_duration=? , wasted_time=?   WHERE taskid=?", [real_time, execution_duration, pause_duration, wasted_time, id], (err, res) => {
                 if (err) {
                     console.log("Error while update status", err);
                     result(null, err);
@@ -309,7 +306,8 @@ Todo.test = (id, result) => {
 }
 
 Todo.getAllTodaytodo = (result) => {
-    dbConn.query("SELECT * FROM task WHERE taskid IN(SELECT taskid FROM selectedtask) ", (err, res) => {
+
+    dbConn.query("SELECT a.taskid , a.first_check ,a.last_check , a.real_time , a.status,b.duration, a.count ,b.instruction, b.taskid , b.title FROM selectedtask a , task b WHERE a.taskid=b.taskid", (err, res) => {
         if (err) {
             console.log("Error while fetching tasks", err);
             result(null, err);

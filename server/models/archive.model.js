@@ -1,20 +1,20 @@
 var dbConn = require("../config/db.config");
 
 var TaskArchive = function (taskarchive) {
-    this.dep = task.dep;
-    this.title = task.title;
-    this.instruction = task.instruction;
-    this.duration = task.duration;
-    this.type = task.type;
-    this.status = task.status;
+    this.taskid=taskarchive.taskid
+    this.dep = taskarchive.dep;
+    this.title = taskarchive.title;
+    this.instruction = taskarchive.instruction;
+    this.duration=taskarchive.duration;
+    this.type = taskarchive.type;
+    this.status= taskarchive.status;
 };
 
 // get all task
 TaskArchive.getAllTasks = (result) => {
-    dbConn.query("SELECT * FROM taskarchive where state='inactive'", (err, res) => {
+    dbConn.query("SELECT * FROM task Where state='inactive'", (err, res) => {
         if (err) {
             console.log("Error while fetching tasks", err);
-            result(null, err);
         } else {
             console.log("task fetched successfully");
             result(null, res);
@@ -24,15 +24,16 @@ TaskArchive.getAllTasks = (result) => {
 
 
 TaskArchive.deleteTask = (result) => {
-    dbConn.query("DELETE FROM taskarchive ", (err, res) => {
+    dbConn.query("Delete from task WHERE state='inactive' ",  (err, res) => {
         if (err) {
             console.log("Error while deleting the task", err);
         }
         else {
-            console.log("Task archive archivedd successfully", res);
-
+            console.log("Task archive deleted successfully", res);
+            
         }
     });
 };
+
 
 module.exports = TaskArchive;

@@ -14,7 +14,7 @@ exports.getTaskList = (req, res) => {
 
 // delete task
 exports.archivedTask = (req, res) => {
-    TaskModel.deleteTask(req.params.id, (err, task) => {
+    TaskModel.archivedTask(req.params.id, (err, task) => {
         if (err) res.send(err);
         res.json({ success: true, message: "Task archivedd successully!" });
     });

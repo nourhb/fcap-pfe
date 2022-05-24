@@ -15,7 +15,7 @@ function NoteDetail() {
 
     // On Page load display all records
     const loadNoteDetail = async () => {
-        axios.get(`http://localhost:5000/api/v1/note`).then((response) => {
+        await axios.get(`http://localhost:5000/api/v1/note`).then((response) => {
             setRecord(response.data);
         });
     };

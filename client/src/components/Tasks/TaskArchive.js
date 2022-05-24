@@ -12,7 +12,7 @@ function TaskArchive() {
     }
     // On Page load display all records
     const loadTaskDetail = async () => {
-        axios.get(`http://localhost:5000/api/v1/archive_task`).then((response) => {
+       await  axios.get(`http://localhost:5000/api/v1/archive_task`).then((response) => {
             setRecord(response.data);
         });
     };
@@ -21,28 +21,26 @@ function TaskArchive() {
         loadTaskDetail();
     }, []);
 
-    const deleteRecord = () => {
+    const deleteRecord =async () => {
         alert("Deleted Successfully");
 
-        axios
-            .delete(`http://localhost:5000/api/v1/archive_task`), { method: 'DELETE' }
-                .then((result) => {
-                    loadTaskDetail();
-                })
-                .catch(() => {
-                    alert("Error in the Code");
-                });
+        await axios
+            .delete(`http://localhost:5000/api/v1/archive_task`),{method: 'DELETE'}
+            .then((result) => {
+                loadTaskDetail();
+            })
+            .catch(() => {
+                alert("Error in the Code");
+            });
     };
-
     return (
         <div className="wallpaper w3-display-container w3-animate-opacity w3-text-white">
-
             <section>
-                <h4 className="mb-3 text-center mt-4">
+                <h1 style={{ marginLeft: "35%", fontSize: "60px" }}>
                     Task archive
-                </h4>
-                <div className="col-sm-8">
-                    <Button variant="primary" onClick={() => {
+                </h1>
+                <div className="col-sm-11">
+                    <button className="btn btn-info" style={{ marginLeft: "3.5%", marginTop: "12%" }}  onClick={() => {
                         refreshPage(); const confirmBox =
                             window.confirm(
                                 "Do you really want to archived all this archive ?"
@@ -53,7 +51,7 @@ function TaskArchive() {
                         }
                     }}  >
                         Delete if you want
-                    </Button>
+                    </button>
                     <div className="input-group mb-4 mt-3">
                     </div>
                     <table className="table table-striped" style={{ marginLeft: "1%", width: "90%" }} >
@@ -63,21 +61,17 @@ function TaskArchive() {
                                 <th>title</th>
                                 <th>instruction</th>
                                 <th>duration</th>
-                                <th>repeated</th>
-                                <th>updated_at</th>
-                                <th>status</th>
+                                <th>Type</th>
                             </tr>
                         </thead>
                         <tbody>
                             {record.map((name, index) => (
-                                <tr key={name.id}>
-                                    <td>{name.id}</td>
+                                <tr className="table-warning" key={name.id}>
+                                    <td>{name.taskid}</td>
                                     <td>{name.title}</td>
                                     <td>{name.instruction}</td>
                                     <td>{name.duration}</td>
                                     <td>{name.type}</td>
-                                    <td>{name.updated_at}</td>
-                                    <td>{name.status}</td>
                                 </tr>
                             ))}
                         </tbody>

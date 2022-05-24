@@ -281,6 +281,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 #relatedPosts {
+        overflow:auto ;
     height: 390px;
     box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
 }

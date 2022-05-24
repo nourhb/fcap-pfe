@@ -13,7 +13,7 @@ function FetchNote() {
     const [modalShowedit, setModalShowedit] = useState(0);
     const [notes, setNotes] = useState([]);
     const loadNoteDetail = async () => {
-        axios.get(`http://localhost:5000/api/v1/note`).then((response) => {
+       await  axios.get(`http://localhost:5000/api/v1/note`).then((response) => {
             setNotes(response.data);
         });
     };
@@ -21,8 +21,8 @@ function FetchNote() {
     useEffect(() => {
         loadNoteDetail();
     }, []);
-    const deleteRecord = (productId) => {
-        axios
+    const deleteRecord = async(productId) => {
+        await axios
             .delete(`http://localhost:5000/api/v1/note/${productId}`)
             .then((result) => {
                 swal({

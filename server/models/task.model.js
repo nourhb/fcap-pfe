@@ -16,7 +16,6 @@ var Task = function (task) {
 Task.getAllTasks = (result) => {
     dbConn.query("SELECT * FROM task where state='active'", (err, res) => {
         if (err) {
-            console.log("Error while fetching tasks", err);
             result(null, err);
         } else {
             console.log("task fetched successfully");
@@ -155,7 +154,7 @@ Task.getTaskByID = (id, result) => {
 };
 
 Task.getTaskStuatusByID = (id, result) => {
-    dbConn.query(" SELECT status FROM task WHERE taskid=?", [id], (err, res) => {
+    dbConn.query(" SELECT status_checked FROM task WHERE taskid=?", [id], (err, res) => {
         if (err) {
             console.log("Error while fetching task by id", err);
             result(null, err);
@@ -192,14 +191,14 @@ Task.updateTask = (id, taskReqData, result) => {
 
 
 Task.ArchiveTask = (id, result) => {
-    dbConn.query("UPDATE task SET etat = 'inactive' WHERE id=?", [id], (err, res) => {
+    dbConn.query("UPDATE task SET state = 'inactive' WHERE id=?", [id], (err, res) => {
         if (err) {
             console.log("Error while archiving the employee");
             result(null, err);
         } else {
             result(null, res);
         }
-        
+
     });
 };
 

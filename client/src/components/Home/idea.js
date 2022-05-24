@@ -5,11 +5,12 @@ import { useTracking } from "react-tracking";
 import Swal from "sweetalert2";
 
 function IdeaDetail() {
+    const [setRecord] = useState([]);
+
     function refreshPage() {
         window.location.reload(false);
     }
     const { trackEvent } = useTracking();
-    const [setRecord] = useState([]);
 
     const [user, setUser] = useState({
         idea: "",
@@ -21,15 +22,6 @@ function IdeaDetail() {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
-    // On Page load display all records
-    const loadIdeaDetail = async () => {
-        axios.get(`http://localhost:5000/api/v1/idea`).then((response) => {
-            setRecord(response.data);
-        });
-    };
-    useEffect(() => {
-        loadIdeaDetail();
-    }, []);
 
     // Insert Idea Records
     const submitIdeaRecord = async (e) => {
@@ -58,7 +50,7 @@ function IdeaDetail() {
 
     return (
         <div>
-            <div class="IDbar title-IDbar">
+            <div className="IDbar title-IDbar">
                 <h2 style={{ color: "#fff" }}>Ideas</h2>
             </div>
             <p>Send us your ideas.</p>

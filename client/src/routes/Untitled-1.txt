@@ -1,0 +1,16 @@
+    <div className="wallpaper w3-display-container w3-animate-opacity w3-text-white">
+
+
+ -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+
+<table className="table table-striped" style={{ marginLeft: "1%", width: "90%" }} >
+
+<tr className="table-warning" key={index}>
+bleu 
+#6a9ebe;
+rose 
+#ff8282ff
+maove
+#333758ee
+

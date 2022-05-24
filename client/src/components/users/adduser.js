@@ -44,7 +44,7 @@ const handleReset = () => {
 }
 
  const AddEmployee = async () => {
-        axios.get(`http://localhost:5000/api/v1/employee`).then((response) => {
+     await   axios.get(`http://localhost:5000/api/v1/employee`).then((response) => {
             setRecord(response.data);
         });
     };
