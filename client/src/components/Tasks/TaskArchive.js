@@ -60,7 +60,10 @@ function TaskArchive() {
                                 <th>id</th>
                                 <th>title</th>
                                 <th>instruction</th>
-                                
+                                 
+
+
+                                 
                                 <th>duration</th>
                                 <th>Type</th>
                             </tr>
