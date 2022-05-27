@@ -2,14 +2,21 @@
 import React from 'react'
 import image from './logo.png'
 
- 
+
 function TopNav(props) {
+	const userid = localStorage.getItem('userid')
+
 	const { user, role } = props
 	const logout = () => {
 		localStorage.removeItem('user')
 		localStorage.removeItem('role')
 		window.location.reload();
 	}
+	const selectTodo = async (userid) => {
+		await axios.post(`http://localhost:5000/api/v1/auth/sessionout/`, {userid })
+
+	}
+
 	return (
 
 		<div>
@@ -61,20 +68,20 @@ function TopNav(props) {
 
 							{user && role == "INFORMATION_TECHNOLOGIES" ?
 
-								<li className ="nav-item"><a href="/DashboardIt" className ="nav-link">Dashboard</a></li>
+								<li className="nav-item"><a href="/DashboardIt" className="nav-link">Dashboard</a></li>
 								: null}
 							{user && role == "MARKETING" ?
-								<li className ="nav-item"><a href="/DashboardMkt" className ="nav-link">Dashboard</a></li>
+								<li className="nav-item"><a href="/DashboardMkt" className="nav-link">Dashboard</a></li>
 								: null}
 							{user && role == "TECHNICHAL_SERVICES" ?
 
-								<li className="nav-item"><a href="/DashboardTech" className ="nav-link">Dashboard</a></li>
+								<li className="nav-item"><a href="/DashboardTech" className="nav-link">Dashboard</a></li>
 								: null} </ul>
 						{user ?
 
-							<button className="logoutbtn" id="button-5" onClick={logout} style={{ marginLeft: "100px" }}><div id="translate"></div><span className='log'>Logout </span></button>
+							<a href="/" ><button className="logoutbtn" id="button-5" onClick={logout} style={{ marginLeft: "100px" }}><div id="translate"></div><span className='log'>Logout </span></button></a>
 							:
-							<a href='/login'><button className ="logoutbtn" id="button-5" style={{ marginLeft: "100px" }}><div id="translate"></div><span className='log' >Login </span></button></a>
+							<a href='/login'><button className="logoutbtn" id="button-5" style={{ marginLeft: "100px" }}><div id="translate"></div><span className='log' >Login </span></button></a>
 
 						}
 

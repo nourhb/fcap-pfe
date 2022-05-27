@@ -67,7 +67,59 @@
     font-weight: 700;
   }
 
-
+    #flamelab-convo-widget1 {
+      position: fixed;
+      top: 150px;
+      right: -40px;
+      animation-name: flamelab-convo-widget_enter;
+      animation-duration: 1.5s;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      z-index: 1000;
+      color: black;
+    }
+  
+    #flamelab-convo-widget1 .flamelab-cw-msg-box1 .flamelab-cw-buttons1 .flamelab-cw-button-yes1,
+    :after,
+    :before {
+      box-sizing: border-box;
+      margin: 0;
+    }
+  
+    #flamelab-convo-widget1 img {
+      animation-name: flamelab-convo-widget_rotate;
+      animation-duration: 1.53s;
+      transform: rotate(-20deg);
+  
+    }
+  
+    .flamelab-cw-msg-box1 {
+      background: rgb(163, 113, 113);
+      width: 280px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgb(0 0 0 / 25%);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      animation-name: flamelab-convo-widget_msg-appear;
+      animation-duration: 2s;
+      font-size: 15px;
+      line-height: 23px;
+    }
+  
+    .flamelab-cw-buttons1 {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 0 -4px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+  
+    .flamelab-cw-button-yes1 {
+      color: #FF1B96;
+      font-weight: 700;
+    }
   .landing {
 
 
@@ -24568,3 +24620,25 @@
     border-color: lightblue;
     transition: 0.3s;
   }
+
+    #searchBar {
+      height: 50px;
+      width: 100%;
+      border-style: none;
+      padding: 10px;
+      font-size: 18px;
+      letter-spacing: 2px;
+      outline: none;
+      border-radius: 25px;
+      color: rgb(2, 1, 0);
+      box-sizing: border-box;
+      background-color: antiquewhite;
+    }
+  
+    #searchBar::placeholder {
+      color: #050101;
+      opacity: 50%;
+      font-size: 18px;
+      letter-spacing: 2px;
+      font-weight: 100;
+    }

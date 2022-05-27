@@ -17,7 +17,6 @@ import TodoTask from "../components/Tasks/todo";
 import TodoToday from "../components/Tasks/today-todo";
 
 
-
 ////////////////////////////////////////////////////////////////////////////1
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "../components/ProtectedRoute";
@@ -30,6 +29,9 @@ import MktRoutes from "./MktRoutes";
 import IdeaFetch from "../components/idea/idea";
 import { Navigate } from "react-router";
 import AuthRoutes from "../components/AuthRoutes";
+import EbayRapport from "../components/EbayRapport/EbayRapport";
+import Selected from "../components/Tasks/selected";
+import Notselected from "../components/Tasks/notselected";
 const Routing = (props) => {
 
     const role = localStorage.getItem('role')
@@ -39,7 +41,9 @@ const Routing = (props) => {
         <Routes>
 
             <Route element={<AuthRoutes user={props.user} />}>
-                <Route path="/Login" element={<Login />} /></Route>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/Login" element={<Login />} />
+            </Route>
             <Route path="/" element={<LandingPage />} />
             <Route path="/todotoday" element={<TodoToday />} />
 
@@ -48,7 +52,7 @@ const Routing = (props) => {
                 <Route path="/Home" element={<Home />} />
                 <Route path="/Notes" element={<Notes />} />
                 <Route path="/Todo" element={<TodoTask />} />
-
+                <Route path="/ebayrapport" element={<EbayRapport />}/>
                 {/* //private
             // ADMIN */}
                 <Route path="/TaskDetails" element={<AdminRoute data={props.role}><TaskDetails /></AdminRoute>} />
@@ -58,10 +62,12 @@ const Routing = (props) => {
                 <Route path="/EmployeeDetails" element={<AdminRoute data={props.role}><EmployeeDetails /> </AdminRoute>} />
                 <Route path="/History" element={<AdminRoute data={props.role}><History /> </AdminRoute>} />
                 <Route path="/idea" element={<AdminRoute data={props.role}><IdeaFetch /> </AdminRoute>} />
+                <Route path="/selectedtasks" element={<AdminRoute data={props.role}><Selected /> </AdminRoute>} />
+                <Route path="/notselectedtasks" element={<AdminRoute data={props.role}><Notselected /> </AdminRoute>} />
 
                 {/* // CUSTOMER_SERVISES */}
                 <Route path="/DashboardCs" element={<CsRoutes data={props.role}><DashboardCs /> </CsRoutes>} />
-                <Route path="/MessageTemplate" element={<CsRoutes data={props.role}><messageTemplate /> </CsRoutes>} />
+                <Route path="/MessageTemplate" element={<CsRoutes data={props.role}><ebayRapport /> </CsRoutes>} />
 
                 {/* // ACCOUNTING    */}
                 <Route path="/DashboardAc" element={<AcRoutes data={props.role}><DashboardAc /> </AcRoutes>} />

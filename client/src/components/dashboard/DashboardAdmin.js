@@ -1,7 +1,11 @@
 import React from 'react'
-
+import EmployeeActivity from './dashType/EmployeeActivity'
+import TaskProgress from './dashType/taskStatus'
 export default function DashboardAdmin() {
-  return (
-	<div>DashboardAdmin</div>
+  return (<div>
+    <div>DashboardAdmin</div>
+    <TaskProgress/>
+    <EmployeeActivity/>
+  </div>
   )
 }

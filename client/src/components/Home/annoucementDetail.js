@@ -34,7 +34,7 @@ function AnnouncementDetail() {
     };
 
     const createHistory = () => {
-        trackEvent({
+        trackEvent({ 
             operation: "Add announcement",
             user: localStorage.getItem('role'),
             time: new Date().toLocaleString(),

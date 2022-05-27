@@ -11,7 +11,7 @@ import TopNav from './components/common/TopNav.js';
 function App() {
 	const user = localStorage.getItem("user")
 	const role = localStorage.getItem("role")
-	const dep = localStorage.getItem("dep")
+	const username = localStorage.getItem("username")
 
 	return (
 		<Container fluid>

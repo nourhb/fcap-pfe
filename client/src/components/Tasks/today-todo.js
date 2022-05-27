@@ -17,15 +17,10 @@ function TodoToday() {
       setTasks([]);
     });
   }
-
   useEffect(() => {
     loadTask();
   }, []);
-
-
-
-
-
+  
   const firstStatus = async (id) => {
 
     axios.put(`http://localhost:5000/api/v1/todo/today/task/firstStatus/${id}`)

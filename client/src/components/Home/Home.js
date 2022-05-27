@@ -7,11 +7,19 @@ import Typed from "react-typed";
 import { BsBookmarkCheck } from "react-icons/bs";
 
 function Home() {
-
-
+    const user = localStorage.getItem('user')
+console.log(user.first_name)
     return (
         <div className="wallpaper w3-display-container w3-animate-opacity w3-text-white">
+            <div id="flamelab-convo-widget1" style={{float:"right"}}>
+                <div className="flamelab-cw-msg-box1">
+                    <span>Hello  </span>
+                </div><br/>
+                <img src="https://clepstep.com/wp-content/uploads/avataaars.png" style={{ width: "173px" }} alt="Avatar Image" />
+
+            </div>
         <div id="main-container" >
+        
             <div id="left-container">
                     <div id="newPost" className="IDcontainer">
 

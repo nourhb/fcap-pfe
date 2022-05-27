@@ -19,19 +19,6 @@ function History() {
     useEffect(() => {
         loadHistory();
     }, []);
-
-
-    // Search Records here
-    const searchRecords = async () => {
-        alert(search);
-        await axios
-            .get(`http://localhost:5000/api/v1/history/searchRecord/${search}`)
-            .then((response) => {
-                setRecord(response.data);
-            });
-    };
-
-
     const deleteRecord = async () => {
         await axios
             .delete(`http://localhost:5000/api/v1/history`)
@@ -68,19 +55,6 @@ function History() {
 
                         }}>delete history archive
                     </button>
-
-                    <div className="input-group mb-4 mt-3">
-                        <div className="form-outline" style={{ marginLeft: "3.5%" }}>
-                            < div id='search' >
-                                <div className="search-box">
-                                    <button className="btn-search" type="button"
-                                        onClick={searchRecords}><ImSearch id="btnsearch" /></button>
-                                    <input type="text" className="input-search" placeholder="Type to Search..."
-                                        onChange={(e) => setSearch(e.target.value)}
-                                        required={true} /></div>
-                            </div>
-                        </div>
-                    </div>
                     <table className="table table-striped " style={{ marginLeft: "5%", width: "100%" }} >
                         <thead>
                             <tr className="table-success">

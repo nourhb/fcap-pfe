@@ -18,7 +18,7 @@ function TodoTask() {
     });
   };
   useEffect(() => {
-    loadTask();
+    loadTask(); 
 
   }, []);
   const selectTodo = async (e, id) => {

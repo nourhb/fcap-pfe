@@ -76,6 +76,8 @@ function TaskDetail() {
                         show={modalShow}
                         onHide={() => setModalShow(false)}
                     />
+                    <> <a href="/selectedtasks"><button className="btn btn-info">selected tasks</button></a></>
+                    <> <a href="/notselectedtasks"><button className="btn btn-info"> not selected tasks</button></a></>
                     <div className="input-group mb-4 mt-3">
                         <div className="form-outline" style={{ marginLeft: "3.5%" }}>
                             < div id='search' >
@@ -132,14 +134,7 @@ function TaskDetail() {
                                         >
                                             Archive
                                         </button>
-                                        <button className="btn btn-success btn-sm mr-2"
-                                            onClick={() => setModalShowtodo(name.id)}
-                                        >Todo</button>
-                                        {modalShowtodo === name.id ? <EditTask
-                                            key={key} data={modalShowtodo}
-                                            show={modalShowtodo === name.id}
-                                            onHide={() => setModalShowtodo(null)}
-                                        /> : <></>}
+                                        
                                     </td>
                                 </tr>
                             ))}
