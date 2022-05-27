@@ -4,8 +4,8 @@ var Note = function (note) {
     this.title = note.title;
     this.details = note.details;
 };
-
-// get all notes     WHERE created_at BETWEEN DATE_FORMAT(CURDATE()- INTERVAL 1 DAY,'%Y-%m-%d') AND CURDATE()
+ 
+// get all notes 
 Note.getAllNotes = (result) => {
     dbConn.query("SELECT * FROM note ", (err, res) => {
         if (err) {

@@ -4,9 +4,8 @@ const AnnouncementModel = require("../models/announcement.model");
 exports.getAnnouncementList = (req, res) => {
     console.log('here all announcement list');
     AnnouncementModel.getAllAnnouncements((err, announcements) => {
-        console.log("We are here");
+        console.log("announcement fetched"); 
         if (err) res.send(err);
-        console.log("Announcements", announcements);
         res.status(200).json(announcements);
     });
 };

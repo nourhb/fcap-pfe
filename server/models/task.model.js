@@ -7,7 +7,6 @@ var Task = function (task) {
     this.instruction = task.instruction;
     this.duration = task.duration;
     this.type = task.type;
-    this.status = task.status;
     this.date_frame = task.date_frame;
 
 };
@@ -66,79 +65,81 @@ function timeConvert(n) {
     return rhours + ':' + rminutes;
 }
 Task.createTask = (taskReqData, result) => {
-    let taskidcode = taskReqData.type.charAt(0) + "-" + taskReqData.title.charAt(0) + taskReqData.title.charAt(1) + Math.floor(Math.random() * 100 + 1);
+    dbConn.query("SELECT id from task ORDER BY id DESC LIMIT 1  ",(err, res) => {
+        let getid = res[0][`id`];
+        let newid = getid+1;
+        let taskidcode = taskReqData.type.charAt(0) + "-" + taskReqData.title.charAt(0) + taskReqData.title.charAt(1) + newid;
     let time = timeConvert(taskReqData.duration)
-    //dbConn.query("INSERT INTO task SET ?", taskReqData, (err, res) => {
     if (taskReqData['type'] == 'Weekly') {
         dbConn.query("SELECT * from task WHERE type='Weekly' ORDER BY id DESC LIMIT 1", (err, result) => {
             if (result.length == 0) {
-                dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,status,date_frame) VALUES (?,?,?,?,?,?,?,?)",
+                dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,date_frame) VALUES (?,?,?,?,?,?,?)",
                     [taskidcode, taskReqData['dep'], taskReqData['title'], taskReqData['instruction'], time, taskReqData['type'],
-                        taskReqData['status'], weekStart]);
+                       weekStart]);
                 console.log("task created successfully");
             } else if (result.length > 0) {
                 for (var i = 0; i < result.length; i++) {
 
                     if (moment(result[i]['date_frame']).format('YYYY-MM-DD') == weekStart) {
-                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,status,date_frame) VALUES (?,?,?,?,?,?,?,?)",
+                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,date_frame) VALUES (?,?,?,?,?,?,?)",
                             [taskidcode, taskReqData['dep'], taskReqData['title'], taskReqData['instruction'], taskReqData['duration'], taskReqData['type'],
-                                taskReqData['status'], moment(weekStart).add(1, 'days').format('YYYY-MM-DD')]);
+                                 moment(weekStart).add(1, 'days').format('YYYY-MM-DD')]);
                     } else if (moment(result[i]['date_frame']).format('YYYY-MM-DD') == weekEnd) {
-                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,status,date_frame) VALUES (?,?,?,?,?,?,?,?)",
+                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,date_frame) VALUES (?,?,?,?,?,?,?)",
                             [taskidcode, taskReqData['dep'], taskReqData['title'], taskReqData['instruction'], time, taskReqData['type']
-                                , taskReqData['status'], weekStart]);
+                                , weekStart]);
                     } else {
-                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,status,date_frame) VALUES (?,?,?,?,?,?,?,?)",
+                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,date_frame) VALUES (?,?,?,?,?,?,?)",
                             [taskidcode, taskReqData['dep'], taskReqData['title'], taskReqData['instruction'], time, taskReqData['type'],
-                                taskReqData['status'], moment(result[i]['date_frame']).add(1, 'days').format('YYYY-MM-DD')]);
+                                moment(result[i]['date_frame']).add(1, 'days').format('YYYY-MM-DD')]);
                     };
                 };
             }
         });
     } else if (taskReqData['type'] == 'Daily') {
 
-        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,status,date_frame) VALUES (?,?,?,?,?,?,?,?)",
+        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,date_frame) VALUES (?,?,?,?,?,?,?)",
             [taskidcode, taskReqData['dep'], taskReqData['title'], taskReqData['instruction'], time, taskReqData['type']
-                , taskReqData['status'], today]);
+                , today]);
         console.log("task created successfully");
 
     }
     else if (taskReqData['type'] == 'Instant') {
-        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,status,date_frame) VALUES (?,?,?,?,?,?,?,?)",
+        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,date_frame) VALUES (?,?,?,?,?,?,?)",
             [taskidcode, taskReqData['dep'], taskReqData['title'], taskReqData['instruction'], time, taskReqData['type']
-                , taskReqData['status'], today]);
+                , today]);
         console.log("task created successfully");
 
     }
     if (taskReqData['type'] == 'Monthly') {
         dbConn.query("SELECT * from task WHERE type='Monthly' ORDER BY id DESC LIMIT 1", (err, result) => {
             if (result.length == 0) {
-                dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,status,date_frame) VALUES (?,?,?,?,?,?,?,?)",
+                dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,date_frame) VALUES (?,?,?,?,?,?,?)",
                     [taskidcode, taskReqData['dep'], taskReqData['title'], taskReqData['instruction'], time, taskReqData['type'],
-                        taskReqData['status'], firstDay]);
+                        firstDay]);
                 console.log("task created successfully");
             } else if (result.length > 0) {
                 for (var i = 0; i < result.length; i++) {
 
                     if (moment(result[i]['date_frame']).format('YYYY-MM-DD') == firstDay) {
-                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,status,date_frame) VALUES (?,?,?,?,?,?,?,?)",
+                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,date_frame) VALUES (?,?,?,?,?,?,?)",
                             [taskidcode, taskReqData['dep'], taskReqData['title'], taskReqData['instruction'], time, taskReqData['type'],
-                                taskReqData['status'], moment(firstDay).add(1, 'days').format('YYYY-MM-DD')]);
+                                 moment(firstDay).add(1, 'days').format('YYYY-MM-DD')]);
                     } else if (moment(result[i]['date_frame']).format('YYYY-MM-DD') == lastDay) {
-                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,status,date_frame) VALUES (?,?,?,?,?,?,?,?)",
+                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,date_frame) VALUES (?,?,?,?,?,?,?)",
                             [taskidcode, taskReqData['dep'], taskReqData['title'], taskReqData['instruction'], time, taskReqData['type'],
-                                taskReqData['status'], firstDay]);
+                                 firstDay]);
                     } else {
-                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,status,date_frame) VALUES (?,?,?,?,?,?,?,?)",
+                        dbConn.query("INSERT INTO task (taskid,dep,title,instruction,duration,type,date_frame) VALUES (?,?,?,?,?,?,?)",
                             [taskidcode, taskReqData['dep'], taskReqData['title'], taskReqData['instruction'], time, taskReqData['type'],
-                                taskReqData['status'], moment(result[i]['date_frame']).add(1, 'days').format('YYYY-MM-DD')]);
+                                moment(result[i]['date_frame']).add(1, 'days').format('YYYY-MM-DD')]);
                     };
                 };
             }
         });
     };
     //});
-}
+})}
 
 
 // get task by ID for update

@@ -14,7 +14,7 @@ var Todo = function (task) {
 
 
 //get all task
-Todo.getAllTodaytodoByDep = (dep, result) => { //data = req.body
+Todo.getAllTodaytodoByDep = (dep, result) => { 
 
     dbConn.query("SELECT * FROM task where date_frame=current_date() and state='active' and dep=? ", [dep], (err, res) => {
         if (err) {
@@ -318,4 +318,107 @@ Todo.getAllTodaytodo = (result) => {
     });
 };
 
+
+
+Todo.getData = async (a,b ) => { //data = req.body
+    let ll = [];
+
+    await dbConn.query("SELECT COUNT(taskid) as total FROM selectedtask WHERE status=0",(err, res) => {
+        if (err) {
+            console.log("Error while fetching tasks", err);
+        } else {
+            console.log("task fetched successfully", res);
+            ll.push(res[0].total)
+
+        }
+    });
+
+    await dbConn.query("SELECT COUNT(taskid) as total FROM selectedtask WHERE status=1", (err, res) => {
+        if (err) {
+            console.log("Error while fetching tasks", err);
+        } else {
+            console.log("task fetched successfully", res);
+            ll.push(res[0].total)
+        }
+    });
+
+    await dbConn.query("SELECT COUNT(taskid) as total FROM selectedtask WHERE status=2", (err, res) => {
+        if (err) {
+            console.log("Error while fetching tasks", err);
+        } else {
+            console.log("task fetched successfully", res);
+            ll.push(res[0].total)
+
+        }
+    });
+
+    await dbConn.query("SELECT COUNT(taskid) as total FROM selectedtask WHERE status=3", (err, res) => {
+        if (err) {
+            console.log("Error while fetching tasks", err);
+        } else {
+            console.log("task fetched successfully", res);
+            ll.push(res[0].total)
+            b(null, ll);
+
+        }
+    });
+};
+
+Todo.depProgress = async (a, b) => { //data = req.body
+    let ll = [];
+
+    await dbConn.query("SELECT count(estimated_time) as total FROM selectedtask WHERE status=3 and estimated_time>execution_duration", (err, res) => {
+        if (err) {
+            console.log("Error while fetching tasks", err);
+        } else {
+            console.log("task fetched successfully", res);
+            ll.push(res[0].total)
+
+        }
+    });
+
+    
+await dbConn.query("SELECT count(estimated_time) as total FROM selectedtask WHERE status = 3 and estimated_time < execution_duration", (err, res) => {
+        if (err) {
+            console.log("Error while fetching tasks", err);
+        } else {
+            console.log("task fetched successfully", res);
+            ll.push(res[0].total)
+            b(null, ll);
+
+        }    
+    });
+};
+
+
 module.exports = Todo;
+Todo.getAllTodaytodoNotSelected = (result) => {
+    dbConn.query(
+        "SELECT * FROM task WHERE state='active'and taskid Not IN(SELECT taskid FROM selectedtask) ",
+        (err, res) => {
+            if (err) {
+                console.log("Error while fetching tasks", err);
+                result(null, err);
+            } else {
+                console.log("tasks fetched successfully");
+                console.log;
+                result(null, res);
+            }
+        }
+    );
+};
+Todo.Todolist = (result) => {
+    dbConn.query(
+        "SELECT * FROM selectedtask,task where task.taskid=selectedtask.taskid ",
+        (err, res) => {
+            if (err) {
+                console.log("Error while fetching tasks", err);
+                result(null, err);
+            } else {
+                console.log("tasks fetched successfully");
+                console.log;
+                result(null, res);
+            }
+        }
+    );
+};

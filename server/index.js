@@ -71,3 +71,8 @@ app.use("/api/v1/archive_task", archiveRoutes);
 const archiveEMPRoutes = require("./routes/archiveEMP.route");
 // create archive routes
 app.use("/api/v1/archiveEMP", archiveEMPRoutes);
+
+
+const rapportRoutes = require("./routes/importTosql")
+//authenticate
+app.use("/api/v1/ebay/", rapportRoutes);

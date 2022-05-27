@@ -86,3 +86,44 @@ exports.addselectedtask = (req, res) => {
         res.status(200).json(result)
     })
 }
+
+exports.getData= (req, res) => {
+    console.log("here all today's tasks list");
+    TodoModel.getData(req.params.id, (err, todolist) => {
+        console.log("We are here");
+        if (err) res.send(err);
+        console.log("status :", todolist);
+        res.status(200).json(todolist);
+    });
+};
+
+
+exports.depProgress = (req, res) => {
+    console.log("here all today's tasks list");
+    TodoModel.depProgress(req.params.id, (err, todolist) => {
+        console.log("We are here");
+        if (err) res.send(err);
+        console.log("status :", todolist);
+        res.status(200).json(todolist);
+    });
+};
+exports.getAllTodaytodoNotSelected = (req, res) => {
+    console.log("here all today's tasks list");
+    TodoModel.getAllTodaytodoNotSelected((err, notselected) => {
+        console.log("We are here");
+        if (err) res.send(err);
+        console.log("today's tasks", notselected);
+        res.status(200).json(notselected);
+    });
+};
+
+exports.Todolist = (req, res) => {
+    console.log("here all today's tasks list");
+    TodoModel.Todolist((err, todolist) => {
+        console.log("We are here");
+        if (err) res.send(err);
+        console.log("today's tasks", todolist);
+        res.status(200).json(todolist);
+    });
+};
+

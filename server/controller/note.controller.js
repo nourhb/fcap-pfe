@@ -10,8 +10,7 @@ exports.getNoteList = (req, res) => {
         res.status(200).json(notes);
     });
 };
-
-
+ 
 // create new note
 exports.createNewNote = (req, res) => {
     const noteReqData = new NoteModel(req.body);
@@ -33,8 +32,6 @@ exports.createNewNote = (req, res) => {
         });
     }
 };
-
-
 
 // update note
 exports.updateNote = (req, res) => {

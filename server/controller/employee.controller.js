@@ -39,10 +39,7 @@ exports.createNewEmployee = (req, res) => {
                 console.log(hash)
                 initialidstr = employeeReqData.first_name.charAt(0) + employeeReqData.last_name.charAt(0) + "-" + Math.floor(Math.random() * 10 + 1);
                 usernamestr = employeeReqData.first_name + " " + employeeReqData.last_name;
-
                 let newEmployeedata = { ...employeeReqData, password: hash, initialid: initialidstr, user_name: usernamestr }
-
-
                 EmployeeModel.createEmployee(newEmployeedata, (err, employee) => {
                     if (err) res.send(err);
                     res.json({
@@ -99,3 +96,13 @@ exports.ArchiveEmployee = (req, res) => {
         res.json({ success: true, message: "Employee archived successully!" });
     });
 };
+exports.Printemployee = (req, res) => {
+
+    EmployeeModel.Printemployee(req.params.id, (err, employee) => {
+        if (err) res.send(err);
+        console.log("single employee data", employee);
+
+        res.status(200).json({ status: 200, error: null, response: employee });
+    });
+};
+           
