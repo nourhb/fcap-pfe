@@ -1,8 +1,6 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
-import Swal from "sweetalert2";
-import 'https://kit.fontawesome.com/a076d05399.js';
 function TodoToday() {
   const [tasks, setTasks] = useState([]);
 
@@ -89,9 +87,9 @@ function TodoToday() {
                 tasks.map((task) => (
                   <tr key={task.taskid} height={"55px"} ><hr />
                   
-                    <td width={"150px"}>	{task.title}</td>
-                    <td width={"150px"}>	{task.instruction}</td>
-                    <td width={"150px"}>	{task.duration}</td>
+                    <td width={"250px"}>	{task.title}</td>
+                    <td width={"250px"}>	{task.instruction}</td>
+                    <td width={"250px"}>	{task.duration}</td>
 
 
                     {/* <td width={"300px"}>	{task.instruction}</td>

@@ -32,6 +32,7 @@ import AuthRoutes from "../components/AuthRoutes";
 import EbayRapport from "../components/EbayRapport/EbayRapport";
 import Selected from "../components/Tasks/selected";
 import Notselected from "../components/Tasks/notselected";
+import NotFound from "../components/common/NotFound";
 const Routing = (props) => {
 
     const role = localStorage.getItem('role')
@@ -46,7 +47,6 @@ const Routing = (props) => {
             </Route>
             <Route path="/" element={<LandingPage />} />
             <Route path="/todotoday" element={<TodoToday />} />
-
             {/* //protected */}
             <Route element={<ProtectedRoute user={props.user} />}>
                 <Route path="/Home" element={<Home />} />
@@ -85,7 +85,7 @@ const Routing = (props) => {
                 <Route path="/DashboardMkt" element={<MktRoutes data={props.role}><DashboardMkt /> </MktRoutes>} />
 
             </Route>
-            <Route path="*" element={<p> 404!</p>} />
+            <Route path="*" element={<NotFound/>} />
         </Routes>
     )
 }

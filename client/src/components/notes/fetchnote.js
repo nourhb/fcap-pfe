@@ -13,14 +13,24 @@ function FetchNote() {
     const [modalShowedit, setModalShowedit] = useState(0);
     const [notes, setNotes] = useState([]);
     const loadNoteDetail = async () => {
-       await  axios.get(`http://localhost:5000/api/v1/note`).then((response) => {
-            setNotes(response.data);
-        });
-    };
+        try {
+            const user = localStorage.getItem('user')
+            let current_user = JSON.parse(user)
+            let id = current_user.dep;
+            console.log(current_user)
+            await axios.get(`http://localhost:5000/api/v1/note/${id}`)
+                .then((response) => {
+                    setNotes(response.data);
 
+                });
+        } catch (err) {
+            console.log(err)
+
+        }
+    };
     useEffect(() => {
         loadNoteDetail();
-    }, []);
+    }, []); 
     const deleteRecord = async(productId) => {
         await axios
             .delete(`http://localhost:5000/api/v1/note/${productId}`)

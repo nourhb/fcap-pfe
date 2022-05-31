@@ -2,35 +2,31 @@ const NoteModel = require("../models/note.model");
 
 // get all note list
 exports.getNoteList = (req, res) => {
+    
     console.log('here all notes list');
-    NoteModel.getAllNotes((err, notes) => {
+    NoteModel.getAllNotes(req.params.id, (err, note) => {
         console.log("We are here");
         if (err) res.send(err);
-        console.log("Notes", notes);
-        res.status(200).json(notes);
+        console.log("Notes", note);
+        res.status(200).json(note);
     });
 };
  
 // create new note
 exports.createNewNote = (req, res) => {
-    const noteReqData = new NoteModel(req.body);
-    console.log("noteReqData", noteReqData);
-    // check null
-    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-        res.status(400).send({
-            success: false,
-            message: "Please fill all fields",
+    const noteReqData = {
+        title: req.body.note.title,
+        details: req.body.note.details,
+        dep_id: req.body.ldep
+    };
+    NoteModel.createNewNote(noteReqData, (err, note) => {
+        if (err) res.send(err);
+        res.json({
+            status: true,
+            message: "note Created Successfully",
+            data: note
         });
-    } else {
-        NoteModel.createNote(noteReqData, (err, note) => {
-            if (err) res.send(err);
-            res.json({
-                status: true,
-                message: "Note Created Successfully",
-                data: note.insertId,
-            });
-        });
-    }
+    });
 };
 
 // update note

@@ -12,24 +12,18 @@ exports.getIdeaList = (req, res) => {
 };
 
 // create new Idea
-exports.createNewIdea = (req, res) => {
-    const ideaReqData = new IdeaModel(req.body);
-    console.log("ideaReqData", ideaReqData);
-    // check null
-    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-        res.status(400).send({
-            success: false,
-            message: "Please fill all fields",
-        });
-    } else {
-        IdeaModel.createIdea(ideaReqData, (err, idea) => {
-            if (err) res.send(err);
-            res.json({
-                status: true,
-                message: "Idea Created Successfully",
-                data: idea.insertId,
-            });
-        });
-    }
-};
 
+exports.createNewIdea = (req, res) => {
+    const ideaReqData = {
+        idea: req.body.newidea.idea,
+        user_id: req.body.userid
+    };
+    IdeaModel.createNewIdea(ideaReqData, (err, idea) => {
+        if (err) res.send(err);
+        res.json({
+            status: true,
+            message: "idea Created Successfully",
+            data: idea
+        });
+    });
+};

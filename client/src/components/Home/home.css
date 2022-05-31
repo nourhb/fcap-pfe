@@ -69,7 +69,7 @@ input[type=checkbox]+label:before {
 }
 
 input[type=checkbox]:checked+label:before {
-    color: #7d5556;
+    color: #68abdf;
     content: "\f00c";
 }
 
@@ -97,8 +97,8 @@ input[type=checkbox]:checked+label:before {
 }
 
 .title-IDbar {
-    height: 48px;
-    text-align: left;
+    height: 64px;
+    text-align: CENTER;
 }
 
 .more-IDbar {
@@ -114,7 +114,8 @@ input[type=checkbox]:checked+label:before {
     font-family: sans-serif;
     font-weight: bold;
     text-transform: uppercase;
-    background: #7d5556;
+    border-radius: 10%;
+    background: #68abdf;
     color: #ffffff;
     text-align: center;
     -webkit-transition: background .5s ease-out;
@@ -131,7 +132,7 @@ input[type=checkbox]:checked+label:before {
 
 .lupa {
     font-size: 20px;
-    color: #7d8083;
+    color: #68abdf;
     position: absolute;
 }
 
@@ -140,7 +141,7 @@ input[type=checkbox]:checked+label:before {
         backdrop-filter: blur(5px);
     width: 1650px;
     height: 1100px;
-    margin: 0;
+    margin-left: 175px;
     padding: 20px;
 }
 
@@ -400,7 +401,7 @@ input[type=checkbox]:checked+label:before {
 .calendar-container {
     width: 320px;
     height: 275px;
-    background: #7d5556;
+    background: #68abdf;
 }
 
 .daysWeek {
@@ -559,7 +560,7 @@ input[type=checkbox]:checked+label:before {
 .profile-img {
     width: 55px;
     height: 55px;
-    background: #786665;
+    background: #68abdf;
     float: left;
     margin: 15px 0 0 20px;
 }

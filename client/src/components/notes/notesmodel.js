@@ -20,25 +20,19 @@ function Addnotesmodal(props) {
     details: ""
   });
 
-  const { title, details } = note;
   const onInputChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
 
-  const loadNoteDetail = async () => {
-    await axios.get(`http://localhost:5000/api/v1/note`).then((response) => {
-      setRecord(response.data);
-    });
-  };
-  useEffect(() => {
-    loadNoteDetail();
-  }, []);
-
   const submitNoteRecord = async (e) => {
     e.preventDefault();
-    e.target.reset();
-    await axios.post("http://localhost:5000/api/v1/note", note);
+    const user = localStorage.getItem('user')
+    let current_user = JSON.parse(user)
+    let ldep = current_user.dep
+
+    await axios.post("http://localhost:5000/api/v1/note", { note, ldep });
     //  alert("Data Inserted");
+    e.target.reset();
 
     loadNoteDetail();
   };
@@ -78,7 +72,6 @@ function Addnotesmodal(props) {
             id="inputenote"
             placeholder="Title"
             name="title"
-            value={title}
             onChange={(e) => onInputChange(e)} />
           <br />
           <br />
@@ -86,10 +79,9 @@ function Addnotesmodal(props) {
             id="textnote"
             placeholder="Details"
             name="details"
-            value={details}
             onChange={(e) => onInputChange(e)}
           /> <br />
-          <button type="submit" className="btn btn-primary btn-block mt-4" onClick={() => { HandleClick(); reset(); createHistory(); }}>ADD</button>
+          <button type="submit" className="btn btn-primary btn-block mt-4" onClick={() => { HandleClick(); createHistory(); }}>ADD</button>
         </form>
 
       </Modal.Body>

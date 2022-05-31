@@ -43,7 +43,7 @@ router.post('/login', (req, res, next) => {
           }
           );
           return res.status(200).send({
-            msg: 'Logged in!',
+           
             token,
             user: result[0],
           });
@@ -71,11 +71,10 @@ router.put('/session', (req, response) => {
 })}
 );
 
-router.post('/sessionout/:userid', (data, response) => {
-  let userid;
-  userid = data;
-  db.query("update login set session_out =current_time where user_id =?", [userid], (err, res) => {
-console.log(data)
+router.put('/sessionout/:id', (request, response) => {
+
+  db.query("update login set session_out=current_time where user_id =?", request.params.id, (err, res) => {
+
     if (err) {
       console.log("Error while updating the task" + err);
       response.status(401).json(err)
@@ -83,24 +82,9 @@ console.log(data)
       console.log("task updated successfully");
       response.status(200).json(res)
     }
-  }
-)}
-);
-router.get('/mail', (req, response) => {
-  const mail = req.body.email;
-  db.query("select * from employees where email =?", mail, (err, res) => {
-
-    if (err) {
-      console.log("Error while searching for mail" + err);
-      response.status(401).json(err)
-    } else {
-      console.log(" mail founded");
-      response.status(200).json(res)
-    }
   })
 }
 );
-
 
 
 

@@ -39,17 +39,6 @@ Task.getTaskByName = (title, result) => {
     );
 };
 
-//setInterval(() => {
-dbConn.query("SELECT * FROM weekly_task", (err, res) => {
-    if (res) {
-        for (var i = 0; i < res.length; i++) {
-            //console.log(res[i]['date_frame'])
-            //   if(new Date() > res[i]['date_frame']){
-            //     dbConn.query('UPDATE weekly_task set date_frame = ? WHERE id = ?',[new Date(),res[i].id]);
-            // };
-        };
-    };
-});
 let currentDate = moment();
 let today = moment().format('YYYY-MM-DD');
 let weekStart = currentDate.clone().startOf('week').format('YYYY-MM-DD');
@@ -66,6 +55,7 @@ function timeConvert(n) {
 }
 Task.createTask = (taskReqData, result) => {
     dbConn.query("SELECT id from task ORDER BY id DESC LIMIT 1  ",(err, res) => {
+
         let getid = res[0][`id`];
         let newid = getid+1;
         let taskidcode = taskReqData.type.charAt(0) + "-" + taskReqData.title.charAt(0) + taskReqData.title.charAt(1) + newid;
@@ -138,7 +128,7 @@ Task.createTask = (taskReqData, result) => {
             }
         });
     };
-    //});
+    
 })}
 
 

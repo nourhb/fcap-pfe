@@ -93,10 +93,10 @@ function Addtaskmodal(props) {
               <option> Select department </option>
               <option value="1"> Admin</option>
               <option value="2"> Information technologie </option>
-              <option value="3"> Marketing </option>
-              <option value="4"> Technical Services </option>
-              <option value="5"> Accounting </option>
-              <option value="6"> Customer services </option>
+              <option value="3"> Accounting  </option>
+              <option value="4"> Customer services  </option>
+              <option value="5"> Marketing </option>
+              <option value="6">  Technical Services </option>
             </select>
           </div>
           <input

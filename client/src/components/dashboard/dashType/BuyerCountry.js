@@ -1,17 +1,16 @@
-import { Doughnut, defaults } from 'react-chartjs-2'
+
+import { Pie, defaults } from 'react-chartjs-2'
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 import React, { useEffect, useState, useRef } from 'react';
-
 import axios from "axios";
-
 Chart.register(ArcElement, Tooltip, Legend);
 
-function TaskProgress () {
+function BuyerCountry() {
     const [record, setRecord] = useState([]);
 
     const loadData = async () => {
 
-        await axios.get(`http://localhost:5000/api/v1/todo/dash`)
+        await axios.get(`http://localhost:5000/api/v1/ebay/buyercountry`)
             .then((res) => {
                 const result = res.data
                 console.log(result);
@@ -19,36 +18,30 @@ function TaskProgress () {
             });
     };
 
-        useEffect(() => {
-            loadData();
-        }, []);
+    useEffect(() => {
+        loadData();
+    }, []);
 
 
     return (
         <div style={{ backgroundColor: "white" }}>
-            <Doughnut
+            <Pie
                 data={{
-                    labels: ['checked', 'started', 'paused', 'done'],
+                    labels: ['united kingdom', 'other countries'],
                     datasets: [
                         {
-                            label: 'nombre des tasks par status',
+                            label: 'estimated time per execution time',
                             data: [
                                 record[0],
-                                record[1],  
-                                record[2],
-                                record[3],
+                                record[1],
                             ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(54, 162, 235, 0.2)'
                             ],
                             borderColor: [
                                 'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
+                                'rgba(54, 162, 235, 1)'
                             ],
                             borderWidth: 1,
                         }
@@ -78,4 +71,4 @@ function TaskProgress () {
     )
 }
 
-export default TaskProgress;
+export default BuyerCountry;

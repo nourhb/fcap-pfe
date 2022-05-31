@@ -104,12 +104,12 @@ exports.depProgress = (req, res) => {
         console.log("We are here");
         if (err) res.send(err);
         console.log("status :", todolist);
-        res.status(200).json(todolist);
-    });
+        res.status(200).json(todolist); 
+    }); 
 };
 exports.getAllTodaytodoNotSelected = (req, res) => {
     console.log("here all today's tasks list");
-    TodoModel.getAllTodaytodoNotSelected((err, notselected) => {
+    TodoModel.getAllTodaytodoNotSelected(req.params.id, (err, notselected) => {
         console.log("We are here");
         if (err) res.send(err);
         console.log("today's tasks", notselected);
@@ -119,7 +119,7 @@ exports.getAllTodaytodoNotSelected = (req, res) => {
 
 exports.Todolist = (req, res) => {
     console.log("here all today's tasks list");
-    TodoModel.Todolist((err, todolist) => {
+    TodoModel.Todolist(req.params.id, (err, todolist) => {
         console.log("We are here");
         if (err) res.send(err);
         console.log("today's tasks", todolist);
@@ -127,3 +127,23 @@ exports.Todolist = (req, res) => {
     });
 };
 
+exports.reminder = (req, res) => {
+    console.log("reminder");
+    TodoModel.reminder(req.params.id, (err, todolist) => {
+        console.log("We are here");
+        if (err) res.send(err);
+        console.log("today's tasks", todolist);
+        res.status(200).json(todolist);
+    });
+};
+
+
+exports.getdepprogress = (req, res) => {
+    console.log("here all today's tasks list");
+    TodoModel.getdepprogress(req.params.id, (err, todolist) => {
+        console.log("We are here");
+        if (err) res.send(err);
+        console.log("status :", todolist);
+        res.status(200).json(todolist);
+    });
+};

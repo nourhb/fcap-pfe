@@ -5,6 +5,7 @@ const mysql = require("mysql");
 const express = require("express");
 const router = express.Router();
 var con = require("../config/db.config");
+const SampleController = require("../controller/sample.controller");
 
 router.post('/ebay', (result, error, next) => {
 
@@ -23,7 +24,7 @@ router.post('/ebay', (result, error, next) => {
 
                 // Creating table "sample"
                 con.query(createStatament, (err, drop) => {
-                    next 
+                    next
                     if (err)
                         console.log("ERROR: ", err);
                 });
@@ -188,7 +189,7 @@ router.post('/ebay', (result, error, next) => {
 
             con.query(insertStatement, items,
                 (err, results, fields) => {
-                    next 
+                    next
                     if (err) {
                         console.log(
                             "Unable to insert item at row ", i + 1);
@@ -201,35 +202,20 @@ router.post('/ebay', (result, error, next) => {
     });
 });
 
-router.get("/rapport",(request, response) => {
-        con.query("SELECT * FROM sample", (err, res) => {
-            if (err) {
-                console.log("Error while fetching rapport", err);
-                response.status(401).json(err)
-            } else {
-                console.log("rapport fetched successfully");
-                response.status(200).json(res)
-            }
-        });
-    });
-
-router.get("/searchrecord/:salerecord", (req, response) => {
-    let salerecord = req.params.salerecord ;
-    con.query("SELECT * FROM sample Where `Sales record`=?",salerecord, (err, res) => {
+router.get("/rapport", (request, response) => {
+    con.query("SELECT * FROM sample", (err, res) => {
         if (err) {
             console.log("Error while fetching rapport", err);
-            
             response.status(401).json(err)
         } else {
-            console.log("searched successfully" , res);
-            
+            console.log("rapport fetched successfully");
             response.status(200).json(res)
         }
     });
 });
 
 router.delete("/", (result) => {
-    dbConn.query("TRUNCATE  table sample ", (err, res) => {
+    con.query("TRUNCATE  table sample ", (err, res) => {
         if (err) {
             console.log("Error while deleting", err);
             result(null, err);
@@ -239,6 +225,34 @@ router.delete("/", (result) => {
     });
 
 });
+
+router.get("/print/:id", (request, response) => {
+    // :id parametre fel req => request.params.id
+    con.query("select * FROM sample WHERE id=?", request.params.id, (err, res) => {
+        if (err) {
+            response.status(401).json(err)
+            console.log(err);
+        } else {
+            response.status(200).json(res);
+        }
+    });
+
+});
+
+
+
+// get all idea
+router.get("/buyercountry", SampleController.getBuyerCountry);
+
+// get all idea
+router.get("/SoldViaPromotedListing", SampleController.SoldViaPromotedListing);
+
+
+
+
+
+
+
 
 
 module.exports = router

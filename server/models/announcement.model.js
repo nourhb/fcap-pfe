@@ -4,6 +4,7 @@ var dbConn = require("../config/db.config");
 var Announcement = function (announcement) {
     this.title = announcement.title;
     this.description = announcement.description;
+    
 };
 
 
@@ -16,13 +17,14 @@ Announcement.getAllAnnouncements = (result) => {
         } else {
             console.log("announcement fetched successfully");
             result(null, res);
-        }
+        } 
     });
 };
 
 // create new announcement
-Announcement.createAnnouncement = (announcementReqData, result) => {
-    dbConn.query("INSERT INTO announcement SET ?", announcementReqData, (err, res) => {
+Announcement.createAnnouncement = (Data , result) => {
+    dbConn.query("INSERT INTO announcement ( title , description , depname) values (?,?,?)", 
+        [Data['title'], Data['description'], Data["dep"] ], (err, res) => {
         if (err) {
             console.log("Error while inserting data");
             result(null, err);

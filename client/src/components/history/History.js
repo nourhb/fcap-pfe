@@ -44,7 +44,7 @@ function History() {
                 <div className="col-sm-11">
                     <div className="history" />
                     <div className="folder" />
-                    <button style={{ marginLeft: "3.5%" }} className="btn btn-outline-danger"
+                    <button style={{ marginLeft: "5%" }} className="btn btn-danger"
                         onClick={() => {
                             const confirmBox = window.confirm("Do you really want to delete all the history ?");
                             if (confirmBox === true) {

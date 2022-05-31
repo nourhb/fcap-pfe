@@ -30,4 +30,12 @@ router.get('/depProgress', TodoController.depProgress);
 router.get('/notselected', TodoController.getAllTodaytodoNotSelected);
 
 router.get('/todolist', TodoController.Todolist);
+
+router.get('/reminder', TodoController.reminder);
+
+
+//get data for dep progress
+router.get('/getdepprogress', TodoController.getdepprogress);
+
+
 module.exports = router;

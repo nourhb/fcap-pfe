@@ -4,19 +4,18 @@ import LoadRapport from "./LoadRapport";
 import "../styles/searchbox.css"
 import { ImSearch } from "react-icons/im";
 import swal from 'sweetalert';
- 
+import Printmodal from './Print'
 
 function EbayRapport() {
   const [record, setRecord] = useState([]);
   const [search, setSearch] = useState("");
   const [modalShowprint, setModalShowprint] = useState("");
 
+
   const loadRapport = async () => {
     await axios.get(`http://localhost:5000/api/v1/ebay/rapport`).then((response) => {
       console.log(response.data)
       setRecord(response.data)
-
-
     });
   };
   useEffect(() => {
@@ -64,9 +63,9 @@ function EbayRapport() {
         <h1 style={{ marginLeft: "35%", fontSize: "60px" }}>
           Ebay rapport
         </h1>                  <span className="task" style={{ marginRight: "100px" }} />
-   
-             <div className="input-group mb-4 mt-3">
-          <div className="form-outline" style={{ marginLeft: "3.5%" , marginTop:"-20%" }}>
+
+        <div className="input-group mb-4 mt-3">
+          <div className="form-outline" style={{ marginLeft: "3.5%", marginTop: "-20%" }}>
             < div id='search' >
               <div className="search-box" style={{ marginLeft: "-55%", marginTop: "20%" }}>
                 <button className="btn-search" type="button"
@@ -75,9 +74,9 @@ function EbayRapport() {
                   onChange={(e) => setSearch(e.target.value)}
                   required={true} /></div>
             </div>
-            <LoadRapport />    
+            <LoadRapport />
 
-            <button style={{ marginLeft: "3.5%" , marginTop:"20%" }} className="btn btn-danger"
+            <button style={{ marginLeft: "3.5%", marginTop: "20%" }} className="btn btn-danger"
               onClick={() => {
                 const confirmBox = window.confirm("Do you really want to delete all invoices records ?");
                 if (confirmBox === true) {
@@ -111,13 +110,14 @@ function EbayRapport() {
                 <th>Sale date</th>
                 <th>Delivery service</th>
                 <th>Tracking number</th>
+                <th>action</th>
 
 
               </tr>
             </thead>
             <tbody>
-              {record.map((name, key) => (
-                <tr className="table-warning" key={name['Sales record']}>
+              {record.map((name, index, key) => (
+                <tr className="table-warning" key={index}>
                   <td>{name['Sales record']}</td>
                   <td>{name['Buyer country']}</td>
                   <td>{name['Item number']}</td>
@@ -128,6 +128,16 @@ function EbayRapport() {
                   <td>{name['Sale date']}</td>
                   <td>{name['Delivery service']}</td>
                   <td>{name['Tracking number']}</td>
+                  <td>
+                    <button className="btn btn-info btn-sm mr-2"
+                      onClick={() => setModalShowprint(name.id)}
+                    >Print</button>
+                    {modalShowprint === name.id ? <Printmodal
+                      key={index} data={modalShowprint}
+                      show={modalShowprint === name.id}
+                      onHide={() => setModalShowprint(null)}
+                    /> : <></>}
+                    </td>
                 </tr>
               ))}
             </tbody>

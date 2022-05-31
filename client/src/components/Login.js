@@ -5,7 +5,7 @@ import axios from "axios";
 import '../login.css'
 import Typed from "react-typed";
 import ErrorBox from '../ErrorBox';
-import ContactUs from './ContactUs';
+import ContactUs from '../components/common/ContactUs' 
 
 function Login() {
   const [modalShowcontact, setModalShowcontact] = useState(false);
@@ -26,15 +26,7 @@ function Login() {
       await axios.post("http://localhost:5000/api/v1/auth/login", user).then(result => {
         /* alert(result.data.user.roles)*/
         localStorage.setItem('role', result.data.user.roles);
-
-
-        localStorage.setItem('user', JSON.stringify(result.data.user));
-        localStorage.setItem('username', JSON.stringify(result.data.user.first_name));
-        const user = localStorage.getItem('user')
-        const username = localStorage.getItem('username')
-        const role = localStorage.getItem('role')
-        console.log(user)
-        console.log(role)
+        localStorage.setItem('user', JSON.stringify(result.data.user))
 
       })
         .then(() => {
@@ -90,9 +82,7 @@ function Login() {
                     <input type="number" className="form-controlInput " placeholder="Cin" required name="cin"
                       value={cin}
                       onChange={(e) => onInputChange(e)} />
-                    {
-                      (cin && cin.length > 8 || cin && cin.length < 8) ? <ErrorBox text={" your password musn't be less than 8 numbers"} /> : null
-                    }
+                    {(cin && cin.length > 8 || cin && cin.length < 8) ? <ErrorBox text={" your password musn't be less than 8 numbers"} /> : null}
 
                   </div>
                   <div className="form-groupLogin *">
@@ -101,8 +91,11 @@ function Login() {
                       name="password"
 
                       value={password}
-                      onChange={(e) => onInputChange(e)} />
-                    <span ></span>
+                      onChange={(e) => onInputChange(e)}
+                    />
+                    {/*
+                      (password && password.length > 8 || password && password.length < 8) ? <ErrorBox text={" your password musn't be less than 8 numbers"} /> : null
+                      */}
                   </div>
                   <div className="form-groupLogin" >
                     <button type="submit" className="submitLogin" style={{ justifyContent: 'center' }}
@@ -128,7 +121,7 @@ function Login() {
               show={modalShowcontact}
               onHide={() => setModalShowcontact(false)}
             />
-                      </div>
+          </div>
         </div>
 
       </div>

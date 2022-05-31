@@ -9,3 +9,4 @@ router.get("/", announcementController.getAnnouncementList);
 router.post("/", announcementController.createNewAnnouncement);
 
 module.exports = router;
+ 

@@ -1,21 +1,36 @@
 /* eslint-disable */
 import React from 'react'
 import image from './logo.png'
-
+import axios from "axios";
+ 
 
 function TopNav(props) {
-	const userid = localStorage.getItem('userid')
+	const { role, user } = props;
 
-	const { user, role } = props
-	const logout = () => {
-		localStorage.removeItem('user')
-		localStorage.removeItem('role')
-		window.location.reload();
-	}
-	const selectTodo = async (userid) => {
-		await axios.post(`http://localhost:5000/api/v1/auth/sessionout/`, {userid })
+	const logout = (e) => {
+		e.preventDefault()
+		localStorage.removeItem('user');
+			localStorage.removeItem('role');
+			window.location.reload()
+	}	
+
+	const Sessionout = async () => {
+		let current_user = JSON.parse(user)
+	let id = current_user.initialid;   
+
+			await axios.put(`http://localhost:5000/api/v1/auth/sessionout/${id}`)
+				.then(result => {
+					console.log(result)
+				})
+	};
+	const sessionend = (e) => {
+	Sessionout()
+		setTimeout(() => {
+		logout(e)	
+		}, 2000);
 
 	}
+
 
 	return (
 
@@ -79,7 +94,7 @@ function TopNav(props) {
 								: null} </ul>
 						{user ?
 
-							<a href="/" ><button className="logoutbtn" id="button-5" onClick={logout} style={{ marginLeft: "100px" }}><div id="translate"></div><span className='log'>Logout </span></button></a>
+					<button className="logoutbtn" id="button-5" onClick={(e)=>sessionend(e)} style={{ marginLeft: "70px" }}><div id="translate"></div><span className='log'>Logout </span></button>
 							:
 							<a href='/login'><button className="logoutbtn" id="button-5" style={{ marginLeft: "100px" }}><div id="translate"></div><span className='log' >Login </span></button></a>
 

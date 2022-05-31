@@ -3,18 +3,19 @@
 	/*top: 50%;
 	left: 50%;
 	transform: translate(-50%,-30%);*/
-	left: 30%;
+	left: 20%;
 	right: 45%;
-
+-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);	
 }
 
 #todo-cmp {
-	background: #ffffff;
+	background: #ffffffc0;
 	color: #497081;
 	padding: 10px 30px;
 	border-radius: 5px;
 	box-shadow: 2px 2px 14px rgb(17, 0, 0);
-	width: 770px;
+	width: 1000px;
 	height: auto;
 }
 

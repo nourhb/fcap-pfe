@@ -15,7 +15,6 @@ function TaskDetail() {
     const [search, setSearch] = useState("");
     const [record, setRecord] = useState([]);
     const [modalShow, setModalShow] = useState(false);
-    const [modalShowtodo, setModalShowtodo] = useState(false);
     const [modalShowedit, setModalShowedit] = useState(0);
     // On Page load display all records
     const loadTaskDetail = async () => {
@@ -89,7 +88,7 @@ function TaskDetail() {
                                         required={true} /></div>
                             </div>
 
-                        </div>
+                        </div> 
                     </div>
                     <table className="table table-striped " style={{ marginLeft: "5%", width: "100%" }} >
                         <thead>

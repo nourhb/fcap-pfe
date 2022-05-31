@@ -3,13 +3,13 @@
   @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
   .wallpaper {
-    background-image: url("C:\Users\user\Desktop\fcap-pfe\client\src\assets\images\bg.jpg");
+    background-image: url("C:\Users\user\Desktop\fcap-pfe\client\src\assets\images\bg.png");
     background-size: cover;
-    min-height: 89vh;
+    min-height: 89.5vh;
     background-repeat: no-repeat;
     background-position: center;
     margin: 0;
-    background-color: #fff;
+    background-color: #212529;
     background-attachment: fixed;
   }
 
@@ -41,7 +41,7 @@
   }
 
   .flamelab-cw-msg-box {
-    background: rgb(163, 113, 113);
+    background: hwb(194 1% 47%);
     width: 280px;
     border-radius: 20px;
     box-shadow: 0 0 20px rgb(0 0 0 / 25%);
@@ -67,59 +67,7 @@
     font-weight: 700;
   }
 
-    #flamelab-convo-widget1 {
-      position: fixed;
-      top: 150px;
-      right: -40px;
-      animation-name: flamelab-convo-widget_enter;
-      animation-duration: 1.5s;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      z-index: 1000;
-      color: black;
-    }
-  
-    #flamelab-convo-widget1 .flamelab-cw-msg-box1 .flamelab-cw-buttons1 .flamelab-cw-button-yes1,
-    :after,
-    :before {
-      box-sizing: border-box;
-      margin: 0;
-    }
-  
-    #flamelab-convo-widget1 img {
-      animation-name: flamelab-convo-widget_rotate;
-      animation-duration: 1.53s;
-      transform: rotate(-20deg);
-  
-    }
-  
-    .flamelab-cw-msg-box1 {
-      background: rgb(163, 113, 113);
-      width: 280px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgb(0 0 0 / 25%);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      animation-name: flamelab-convo-widget_msg-appear;
-      animation-duration: 2s;
-      font-size: 15px;
-      line-height: 23px;
-    }
-  
-    .flamelab-cw-buttons1 {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      margin: 0 -4px;
-      margin-top: 8px;
-      font-weight: 600;
-    }
-  
-    .flamelab-cw-button-yes1 {
-      color: #FF1B96;
-      font-weight: 700;
-    }
+
   .landing {
 
 
@@ -241,9 +189,9 @@
 
   .todo3 {
     background-image: url("C:\Users\user\Desktop\fcap-pfe\client\src\assets\images\todo3.gif");
-    min-height: 20vh;
-    height: 70px;
-    width: 200px;
+    min-height: 18vh;
+    height: 52px;
+    width: 207px;
     background-position: relative;
     background-size: cover;
     margin-left: -5%;
@@ -298,7 +246,7 @@
     max-width: 5vh;
     background-size: cover;
     margin-left: -25px;
-    margin-top: -20px;
+    margin-top: -45px;
     margin-bottom: -20px;
   }
 
@@ -358,8 +306,8 @@
   /* 12 */
   .btn-12 {
     position: relative;
-    right: -200px;
-    bottom: 120px;
+    left: -436px;
+    bottom: -10px;
     border: none;
     box-shadow: none;
     width: 130px;
@@ -557,7 +505,7 @@
     font-weight: 400;
     line-height: 1.5;
     text-align: left;
-    background-color: #649fbe;
+    background-color: #68abdf00;
   }
 
   [tabindex="-1"]:focus {
@@ -577,7 +525,8 @@
   h5,
   h6 {
     margin-top: 0;
-    margin-bottom: .5rem
+    margin-bottom: .5rem;
+    color : white;
   }
 
   p {
@@ -17780,7 +17729,7 @@
   }
 
   .bg-dark {
-    background-color: #649fbe !important;
+    background-color: #2a93bf !important;
   }
 
   a.bg-dark:hover,
@@ -21920,11 +21869,11 @@
 
   body {
     font-family: "Roboto", Arial, sans-serif;
-    background: #649fbe;
+    background: #2a93bf;
     font-size: 16px;
     line-height: 1.8;
     font-weight: 400;
-    color: #649fbe;
+    color: #2a93bf;
   }
 
   body.menu-show {
@@ -22006,7 +21955,7 @@
   }
 
   .ftco-navbar-light {
-    background: #649fbe;
+    background:#2a93bf;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     position: absolute;
@@ -22061,11 +22010,11 @@
   }
 
   .ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
-    font-size: 14px;
+    font-size: 20px;
     padding-top: 1.8rem;
     padding-bottom: 1.8rem;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
     position: relative;
@@ -22230,7 +22179,7 @@
     bottom: 0;
     content: '';
     opacity: .3;
-    background: #649fbe;
+    background: #2a93bf;
   }
 
   .hero-wrap.hero-wrap-2 {
@@ -22457,7 +22406,7 @@
     border-radius: 4px;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    font-size: 11px;
+    font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
@@ -24481,9 +24430,9 @@
     display: inline-flex;
     height: 40px;
     width: 150px;
-    border: 2px solid #ff8282ff;
+    border: 2px solid #721c24;
     margin: 20px 20px 20px 20px;
-    color: #ff8282ff;
+    color: #721c24;
     text-transform: uppercase;
     text-decoration: none;
     font-size: 1em;
@@ -24510,7 +24459,7 @@
     height: 250%;
     left: -200px;
     top: -30px;
-    background: #ff8282ff;
+    background: #721c24;
     position: absolute;
     transition: all .3s ease-Out;
   }
@@ -24520,7 +24469,7 @@
   }
 
   #button-5:hover .log {
-    color: #333758ee;
+    color: #fff;
   }
 
   /* ******************************** */
@@ -24621,24 +24570,112 @@
     transition: 0.3s;
   }
 
-    #searchBar {
-      height: 50px;
-      width: 100%;
-      border-style: none;
-      padding: 10px;
-      font-size: 18px;
-      letter-spacing: 2px;
-      outline: none;
-      border-radius: 25px;
-      color: rgb(2, 1, 0);
-      box-sizing: border-box;
-      background-color: antiquewhite;
-    }
-  
-    #searchBar::placeholder {
-      color: #050101;
-      opacity: 50%;
-      font-size: 18px;
-      letter-spacing: 2px;
-      font-weight: 100;
-    }
+
+  #flamelab-convo-widget1 {
+    position: fixed;
+    top: 150px;
+    right: -40px;
+    animation-name: flamelab-convo-widget_enter;
+    animation-duration: 1.5s;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 1000;
+    color: black;
+  }
+
+  #flamelab-convo-widget1 .flamelab-cw-msg-box1 .flamelab-cw-buttons1 .flamelab-cw-button-yes1,
+  :after,
+  :before {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  #flamelab-convo-widget1 img {
+    animation-name: flamelab-convo-widget_rotate;
+    animation-duration: 1.53s;
+    transform: rotate(-20deg);
+
+  }
+
+  .flamelab-cw-msg-box1 {
+    background: #68abdf;
+    width: 200px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgb(0 0 0 / 25%);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    animation-name: flamelab-convo-widget_msg-appear;
+    animation-duration: 2s;
+    font-size: 27px;
+    line-height: 30px;
+  }
+
+  .flamelab-cw-buttons1 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 -4px;
+    margin-top: 8px;
+    font-weight: 600;
+  }
+
+  .flamelab-cw-button-yes1 {
+    color: #FF1B96;
+    font-weight: 700;
+  }
+
+
+  #searchBar {
+    height: 50px;
+    width: 100%;
+    border-style: none;
+    padding: 10px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    outline: none;
+    border-radius: 25px;
+    color: rgb(2, 1, 0);
+    box-sizing: border-box;
+    background-color: antiquewhite;
+  }
+
+  #searchBar::placeholder {
+    color: #050101;
+    opacity: 50%;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 100;
+  }
+
+
+
+
+
+
+  .clock {
+    min-height: 111px;
+    background-color: #2e3641;
+    color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 40px;
+  }
+
+  #clock {
+    margin: 0 5px;
+    font-size: 35px;
+    text-transform: capitalize;
+    font-weight: 600;
+    width: 35px;
+    height: 35px;
+  }
+
+  #time {
+    padding-top: 5px;
+    margin: 0 5px;
+    text-transform: capitalize;
+    font-weight: 600;
+  }

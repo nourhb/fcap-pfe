@@ -4,9 +4,9 @@ const router = express.Router();
 const noteController = require("../controller/note.controller");
 
 // get all notes
-router.get("/", noteController.getNoteList);
+router.get("/:id", noteController.getNoteList);
 
-// create new note
+// create new note 
 router.post("/", noteController.createNewNote);
 
 // update note

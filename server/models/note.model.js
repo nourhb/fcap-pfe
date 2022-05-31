@@ -3,11 +3,14 @@ var dbConn = require("../config/db.config");
 var Note = function (note) {
     this.title = note.title;
     this.details = note.details;
+
 };
  
 // get all notes 
-Note.getAllNotes = (result) => {
-    dbConn.query("SELECT * FROM note ", (err, res) => {
+Note.getAllNotes = (id,  result) => {
+    console.log(id)
+
+    dbConn.query("SELECT * FROM note where dep_id=? " ,id,(err, res) => {
         if (err) {
             console.log("Error while fetching notes", err);
             result(null, err);
@@ -20,17 +23,19 @@ Note.getAllNotes = (result) => {
 
 
 // create new note
-Note.createNote = (noteReqData, result) => {
-    dbConn.query("INSERT INTO note SET ?", noteReqData, (err, res) => {
-        if (err) {
-            console.log(err);
-            result(null, err);
-        } else {
-            console.log("Note created successfully");
-            result(null, res);
-        }
-    });
-};
+    Note.createNewNote = (Data, result) => {
+        dbConn.query("INSERT INTO note ( title , details , dep_id) values (?,?,?)",
+            [Data['title'], Data['details'], Data["dep_id"]], (err, res) => {
+                if (err) {
+                    console.log("Error while inserting data");
+                    result(null, err);
+                } else {
+                    console.log("note created successfully");
+                    result(null, res);
+                }
+            });
+    };
+
 
 // get note by ID for update
 Note.getNoteByID = (id, result) => {

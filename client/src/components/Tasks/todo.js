@@ -8,22 +8,28 @@ function TodoTask() {
   const [status, setStatus] = useState([]);
   const [modalShowselected, setModalShowselected] = useState(false);
 
-  const userid = localStorage.getItem('userid')
 
   const loadTask = async () => {
-    const dep = localStorage.getItem('dep')
+    const user = localStorage.getItem('user')
+    let current_user = JSON.parse(user)
+    let dep = current_user.dep;
 
     axios.get("http://localhost:5000/api/v1/todo/today/tasks/" + dep).then((response) => {
       setTasks(response.data);
     });
   };
   useEffect(() => {
-    loadTask(); 
+    loadTask();
 
   }, []);
   const selectTodo = async (e, id) => {
+
     const taskid = e.target.value;
-    const dep = localStorage.getItem('dep')
+    const user = localStorage.getItem('user')
+    let current_user = JSON.parse(user)
+    let dep = current_user.dep;
+    let userid = current_user.initialid;
+
     await axios.post(`http://localhost:5000/api/v1/todo/addselectedtask`, { taskid, dep, userid })
     getStatus(id);
 
@@ -32,13 +38,12 @@ function TodoTask() {
     axios.get(`http://localhost:5000/api/v1/task/status/${id}`)
       .then((result) => {
         let { response } = result.data
-        console.log("this is the result", response[0])
         setStatus(response);
       });
 
   };
   return (
-    <div className="wallpaper w3-display-container w3-animate-opacity w3-text-white">
+    <div className="wallpaper w3-display-container w3-animate-opacity w3-text-white"><br/>
       <div id="center">
         <section id="todo-cmp">
           <header id="todo-cmp__header">
@@ -63,26 +68,27 @@ function TodoTask() {
               {tasks.map((task) => (
                 <tr height={"55px"} key={task.taskid}  >
                   <td width={"60px"}>  <div className='point' /> </td>
-                  <td width={"200px"}>	{task.title}</td>
-                  <td width={"200px"}>	{task.instruction}</td>
-                  <td width={"150px"}>                                        <button
-                    style={{
-                      border: "3px solid #066892",
-                      borderRadius: "13px"
-                    }}
-                    value={task.taskid}
-                    onClick={(e) => {
-                      const confirmBox =
-                        window.confirm(
-                          "you want to  add this task ? :  " +
-                          task.title);
-                      if (confirmBox === true) {
-                        selectTodo(e);
-                      }
-                    }}
-                  >
-                    add
-                  </button>
+                  <td width={"250px"}>	{task.title}</td>
+                  <td width={"400px"}>	{task.instruction}</td>
+                  <td width={"150px"}>
+                    <button
+                      style={{
+                        border: "3px solid #066892",
+                        borderRadius: "13px"
+                      }}
+                      value={task.taskid}
+                      onClick={(e) => {
+                        const confirmBox =
+                          window.confirm(
+                            "you want to  add this task ? :  " +
+                            task.title);
+                        if (confirmBox === true) {
+                          selectTodo(e);
+                        }
+                      }}
+                    >
+                      add
+                    </button>
                   </td>
                   <td width={"30px"} >
                     {
